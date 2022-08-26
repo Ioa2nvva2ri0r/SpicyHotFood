@@ -1,0 +1,56 @@
+@import "../../../mixin-extend.scss";
+
+.pages {
+  &__list {
+    @include throw(li);
+    @include d-flex(
+      (
+        al: center,
+        ju: center,
+      )
+    );
+    padding-top: 30px;
+  }
+  &__item {
+    margin: 0 8px;
+  }
+  &__link {
+    display: block;
+    text-decoration: none;
+    @include bordered-padding(1px solid #f2f2f2, 5px, all, 3px 8px);
+    font-weight: 900;
+    color: #a0a0a0;
+    background-color: transparent;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.04);
+    @include transitions((border-color, color));
+    &:hover,
+    &:focus {
+      @include transitions(
+        (border-color, color),
+        (
+          border-color: #f1d5af,
+          color: #f1d5af,
+        )
+      );
+    }
+    &:active {
+      @include transitions(
+        (border-color, color),
+        (
+          border-color: #ae936c,
+          color: #ae936c,
+        )
+      );
+    }
+    &_active {
+      border-color: #f1d5af;
+      color: #fff;
+      background-color: #f1d5af;
+      &:hover,
+      &:focus,
+      &:active {
+        color: #fff;
+      }
+    }
+  }
+}

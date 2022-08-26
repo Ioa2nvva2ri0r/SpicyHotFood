@@ -1,0 +1,559 @@
+@import "../../mixin-extend.scss";
+
+%btnDesc {
+  & strong {
+    @include font(
+      (
+        si: 15px,
+        we: 700,
+      )
+    );
+    @include transition(color, #fff);
+  }
+  & svg {
+    margin-right: 10px;
+  }
+  &:hover strong,
+  &:focus strong,
+  &:active strong {
+    @include transition(color, #ae936c);
+  }
+}
+
+.main {
+  @include d-flex(
+    (
+      al: flex-start,
+      ju: space-between,
+    )
+  );
+  @include bordered-padding(1px solid #f3ea693f, 15px, all, 20px);
+  background: linear-gradient(#f1cba4, #f0f1d0);
+  box-shadow: 5px 6px 6px rgba(74, 25, 25, 0.05);
+  @media (max-width: 675px) {
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+  }
+}
+
+.content {
+  padding-right: 20px;
+  @media (max-width: 675px) {
+    width: 100%;
+    padding: 0 0 8px 0;
+  }
+}
+
+.logo {
+  @include logo(255px);
+  @media (max-width: 675px) {
+    @include d-flex(
+      (
+        al: center,
+        ju: center,
+      )
+    );
+    margin-bottom: 10px;
+    &__link {
+      width: 187px;
+    }
+  }
+}
+
+.desc {
+  @include throw(desc);
+  @include d-flex(
+    (
+      al: center,
+      di: column,
+    )
+  );
+  min-width: 370px;
+  max-width: 380px;
+  padding-left: 25px;
+  text-indent: -25px;
+  @include font(
+    (
+      si: 18px,
+      we: 500,
+      co: #fff,
+    )
+  );
+  & svg {
+    @include block-size(20px, 20px);
+    margin: 0 5px -3px 0;
+  }
+  &__box {
+    width: 100%;
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+  }
+  &__time {
+    @include font(
+      (
+        we: 700,
+        co: #ae936c,
+      )
+    );
+    margin: 0 5px;
+  }
+  @media (max-width: 1115px) {
+    max-width: 470px;
+  }
+  @media (max-width: 860px) {
+    min-width: 300px;
+    max-width: 335px;
+    @include font(
+      (
+        si: 16px,
+        he: 23px,
+      )
+    );
+  }
+  @media (max-width: 675px) {
+    width: 100%;
+    min-width: initial;
+    max-width: initial;
+    @include font(
+      (
+        si: 18px,
+        he: 23px,
+      )
+    );
+    &__box {
+      text-align: center;
+    }
+  }
+  @media (max-width: 420px) {
+    @include font(
+      (
+        si: 13px,
+        he: 15px,
+      )
+    );
+    & svg {
+      @include block-size(15px, 15px);
+      margin: 0 5px -1px 0;
+    }
+  }
+}
+
+.nav {
+  &__list {
+    @include throw(li);
+    @include d-flex(
+      (
+        al: center,
+        ju: flex-end,
+      )
+    );
+  }
+  &__item {
+    &:not(:last-child) {
+      margin-right: 25px;
+    }
+  }
+  &__btn {
+    @include throw(btn);
+    @include d-flex(
+      (
+        al: center,
+      )
+    );
+    & svg {
+      @include block-size(22px, 22px);
+    }
+    & svg > path {
+      @include transitions((stroke, fill));
+    }
+    &_basket {
+      @extend %btnDesc;
+      &:hover svg > path,
+      &:focus svg > path,
+      &:active svg > path {
+        @include transition(stroke, #ae936c);
+      }
+    }
+    &_favorite {
+      text-decoration: none;
+      @extend %btnDesc;
+      &:focus {
+        outline: none;
+      }
+      &:hover svg > path,
+      &:focus svg > path,
+      &:active svg > path {
+        @include transitions(
+          (stroke, fill),
+          (
+            stroke: #ff314f,
+            fill: #ff314f,
+          )
+        );
+      }
+      &:hover strong,
+      &:focus strong,
+      &:active strong {
+        @include transition(color, #ff314f);
+      }
+      &__active {
+        & svg > path {
+          stroke: #ff314f;
+          fill: #ff314f;
+        }
+        & strong {
+          color: #ff314f;
+        }
+      }
+    }
+    &_user {
+      @extend %btnDesc;
+      &:hover svg > path,
+      &:focus svg > path,
+      &:active svg > path {
+        @include transition(fill, #ae936c);
+      }
+    }
+    &_menu {
+      &__open {
+        cursor: pointer;
+        @include bordered-padding(none, 5px, all, 4px 8px);
+        background-color: transparent;
+      }
+      &__close {
+        @include throw(btn);
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        @include block-size(20px, 20px);
+        border-radius: 100%;
+        background-color: #fff;
+        box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.05);
+        @include transition(background-color);
+        & svg {
+          @include block-size(20px, 20px);
+          & > path {
+            fill: #ff314f;
+            @include transition(fill);
+          }
+        }
+        &:hover,
+        &:focus,
+        &:active {
+          background-color: #ff314f;
+        }
+        &:hover svg > path,
+        &:focus svg > path,
+        &:active svg > path {
+          @include transition(fill, #fff);
+        }
+      }
+    }
+  }
+  @media (max-width: 1115px) {
+    padding-bottom: 15px;
+    &__container {
+      @include d-flex(
+        (
+          di: column-reverse,
+        )
+      );
+    }
+  }
+  @media (max-width: 675px) {
+    padding-bottom: 0;
+    &__list {
+      padding: 10px 0 0 15px;
+    }
+    &__container {
+      width: 100%;
+      @include d-flex(
+        (
+          di: row,
+          ju: space-between,
+        )
+      );
+    }
+  }
+  @media (max-width: 420px) {
+    position: fixed;
+    @include d-flex(
+      (
+        al: center,
+        ju: space-between,
+        di: column,
+      )
+    );
+    top: 0;
+    left: 0;
+    z-index: 20;
+    padding: 10px 35px;
+    @include block-size(100%, 125px);
+    background-color: #ebc89ed9;
+    @include modal-Y(open, -100px);
+    &__close {
+      @include modal-Y(close, -100px);
+    }
+    &__list {
+      padding: 0;
+    }
+  }
+}
+
+.menu {
+  @include d-flex(
+    (
+      al: center,
+      ju: flex-end,
+    )
+  );
+  padding-bottom: 15px;
+  &__list {
+    @include throw(li);
+    @include d-flex(
+      (
+        al: center,
+        ju: flex-end,
+      )
+    );
+    overflow: hidden;
+    border-radius: 5px;
+  }
+  &__link {
+    display: block;
+    text-decoration: none;
+    @include bordered-padding(1px solid transparent, 0, all, 6px 11px);
+    @include font(
+      (
+        si: 18px,
+        we: 700,
+        co: #ae936c,
+      )
+    );
+    background-color: #fff;
+    @include transitions((border-color, color, background-color));
+    &:hover,
+    &:focus {
+      outline: none;
+      @include transitions(
+        (border-color, color, background-color),
+        (
+          border-color: #fff,
+          color: #fff,
+          background-color: transparent,
+        )
+      );
+    }
+    &:active {
+      @include transitions(
+        (border-color, color, background-color),
+        (
+          border-color: #ff314f,
+          color: #fff,
+          background-color: #ff314f,
+        )
+      );
+    }
+    &_open {
+      @extend %redBtn;
+      @include d-flex(
+        (
+          al: center,
+        )
+      );
+      & svg {
+        @include block-size(22px, 22px);
+        margin-right: 6px;
+        & g path {
+          @include transition(fill);
+        }
+      }
+      &:hover svg g path,
+      &:focus svg g path {
+        @include transition(fill, #ff314f);
+      }
+      &:active svg g path {
+        @include transition(fill, #fff);
+      }
+    }
+    &_active {
+      border-color: #ff314f;
+      color: #fff;
+      background-color: #ff314f;
+    }
+  }
+  &__slider {
+    @include d-flex(
+      (
+        al: center,
+        ju: center,
+      )
+    );
+    position: fixed;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 10;
+    border-radius: 0;
+    padding: 5px 30px;
+    background-color: #ffe7ce;
+    box-shadow: 5px 6px 6px rgba(74, 25, 25, 0.05);
+    @include modal-Y(open, -100px);
+    &_close {
+      @include modal-Y(close, -100px);
+    }
+    &_btn {
+      @include d-flex(
+        (
+          al: center,
+          ju: center,
+        )
+      );
+      position: absolute;
+      cursor: pointer;
+      top: 50%;
+      z-index: 50;
+      @include block-size(35px, 35px);
+      @include bordered-padding(3px solid #fff, 100%, all, 0 0 0 0);
+      background-color: red;
+      transform: translateY(-50%);
+    }
+  }
+  @media (max-width: 1115px) {
+    padding-bottom: 0;
+    &__link {
+      text-align: center;
+      border-right: 1px solid #d0cfcf;
+    }
+  }
+}
+
+.call {
+  @include throw(btn);
+  @include block-size(28px, 28px);
+  margin-right: 15px;
+  & svg {
+    @include block-size(28px, 28px);
+  }
+}
+
+.tel {
+  &__container {
+    position: relative;
+    @include d-flex(
+      (
+        al: center,
+        ju: flex-end,
+      )
+    );
+    padding-bottom: 15px;
+  }
+  &__box {
+    @include d-flex(
+      (
+        al: center,
+      )
+    );
+    padding: 2px 5px;
+    margin-right: 15px;
+  }
+  &__link {
+    @include d-flex(
+      (
+        al: center,
+      )
+    );
+    text-decoration: none;
+    padding: 5px 8px;
+    @include font(
+      (
+        si: 18px,
+        we: 700,
+        he: 18px,
+        co: #fff,
+      )
+    );
+    @include transition(color);
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      @include transition(color, #ff314f);
+    }
+    & svg {
+      @include block-size(20px, 20px);
+      margin-right: 5px;
+    }
+    & svg > g {
+      @include transition(fill);
+    }
+    &:hover svg g[class="g-background-first"],
+    &:focus svg g[class="g-background-first"],
+    &:active svg g[class="g-background-first"] {
+      @include transition(fill, #ec0023);
+    }
+    &:hover svg g[class="g-background-last"],
+    &:focus svg g[class="g-background-last"],
+    &:active svg g[class="g-background-last"] {
+      @include transition(fill, #ff314f);
+    }
+  }
+  &__btn {
+    @extend %redBtn;
+  }
+  @media (max-width: 1115px) {
+    &__box {
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      width: 310px;
+      overflow: hidden;
+      margin-right: 0;
+      border-radius: 5px;
+      background-color: #ebc89e;
+      @include visibility(visible);
+      &_close {
+        @include visibility(hidden);
+      }
+    }
+    &__link {
+      @include modal-X(open);
+      &_close {
+        @include modal-X(close);
+      }
+    }
+  }
+  @media (max-width: 675px) {
+    &__container {
+      padding: 0 0 0 15px;
+    }
+  }
+  @media (max-width: 420px) {
+    &__container {
+      flex-direction: column-reverse;
+      padding: 0 0 10px 0;
+    }
+    &__box {
+      position: initial;
+      justify-content: center;
+      top: initial;
+      right: initial;
+      padding: 0;
+      animation-name: initial;
+      background-color: transparent;
+    }
+    &__btn {
+      margin-bottom: 10px;
+    }
+    &__link {
+      animation-name: initial;
+    }
+  }
+}

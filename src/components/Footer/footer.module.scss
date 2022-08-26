@@ -1,0 +1,188 @@
+@import "../../mixin-extend.scss";
+
+.main {
+  @include d-flex(
+    (
+      al: center,
+      di: column,
+    )
+  );
+  @include bordered-padding(1px solid #f3ea693f, 15px, all, 20px);
+  background: linear-gradient(#f1cba4, #f0f1d0);
+  box-shadow: 5px 6px 6px rgba(74, 25, 25, 0.05);
+  @media (max-width: 860px) {
+    padding: 10px 15px;
+  }
+}
+
+.logo {
+  @include logo(255px, 10px);
+  @media (max-width: 675px) {
+    @include d-flex(
+      (
+        al: center,
+        ju: center,
+      )
+    );
+    margin-bottom: 10px;
+    &__link {
+      width: 187px;
+    }
+  }
+}
+
+.content {
+  @include d-flex(
+    (
+      al: center,
+      ju: space-between,
+    )
+  );
+  width: 100%;
+  @media (max-width: 860px) {
+    flex-direction: column;
+  }
+}
+
+.desc {
+  @include d-flex(
+    (
+      di: column,
+    )
+  );
+  margin: 0;
+  width: 100%;
+  max-width: 640px;
+  padding-left: 25px;
+  text-indent: -25px;
+  @include font(
+    (
+      si: 20px,
+      we: 500,
+      he: 30px,
+      co: #fff,
+    )
+  );
+  & svg {
+    @include block-size(20px, 20px);
+    margin: 0 5px -3px 0;
+  }
+  & strong {
+    @include font(
+      (
+        we: 700,
+        whsp: nowrap,
+        co: #f36969,
+      )
+    );
+  }
+  & a {
+    text-decoration: none;
+    @include font(
+      (
+        we: 700,
+        whsp: nowrap,
+        co: #f36969,
+      )
+    );
+    @include transition(color);
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      @include transition(color, #ff0026);
+    }
+  }
+  @media (max-width: 1115px) {
+    max-width: 550px;
+    @include font(
+      (
+        si: 17px,
+        he: 25px,
+      )
+    );
+  }
+  @media (max-width: 860px) {
+    padding-bottom: 15px;
+  }
+  @media (max-width: 545px) {
+    max-width: 290px;
+    padding: 0 0 10px 10px;
+    text-indent: -12px;
+    @include font(
+      (
+        si: 9px,
+        he: 14px,
+      )
+    );
+    & svg {
+      @include block-size(10px, 10px);
+      margin: 0 2px -1px 0;
+    }
+  }
+}
+
+.img {
+  min-width: 300px;
+  max-width: 300px;
+  height: 270px;
+  margin: 0 10px;
+  @media (max-width: 1115px) {
+    min-width: 200px;
+    max-width: 200px;
+    height: 170px;
+  }
+  @media (max-width: 860px) {
+    display: none;
+  }
+}
+
+.socials {
+  &__list {
+    @include throw(li);
+  }
+  &__item {
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+  }
+  &__link {
+    display: block;
+    @include block-size(38px, 38px);
+    @include transition(transform);
+    & svg > g > path {
+      @include transition(fill);
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      @include transition(transform, scale(1.1));
+    }
+    &:hover svg g path[class="path-background"],
+    &:focus svg g path[class="path-background"],
+    &:active svg g path[class="path-background"] {
+      @include transition(fill, #ff314f);
+    }
+  }
+  @media (max-width: 860px) {
+    &__list {
+      display: flex;
+    }
+    &__item {
+      &:not(:last-child) {
+        margin-bottom: 0;
+        margin-right: 15px;
+      }
+    }
+  }
+  @media (max-width: 545px) {
+    &__link {
+      display: block;
+      @include block-size(25px, 25px);
+      & svg {
+        @include block-size(25px, 25px);
+      }
+    }
+  }
+}

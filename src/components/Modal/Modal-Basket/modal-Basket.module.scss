@@ -1,0 +1,218 @@
+@import "../../../mixin-extend.scss";
+
+.main {
+  @include d-flex(
+    (
+      ju: flex-end,
+    )
+  );
+  @include block-size(100%, 100%);
+  position: fixed;
+  user-select: none;
+  z-index: 50;
+  top: 0;
+  right: 0;
+  background-color: #00000062;
+  @include modal-X(open);
+  &__close {
+    @include modal-X(close);
+  }
+}
+
+.content {
+  height: 100%;
+  &__container {
+    @include d-flex(
+      (
+        ju: space-between,
+        di: column,
+      )
+    );
+    @include block-size(385px, 100%);
+    padding: 20px 15px;
+    background-color: #ffffff;
+    box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+  }
+  @media (max-width: 545px) {
+    &__container {
+      width: 100%;
+    }
+  }
+  @media (max-width: 420px) {
+    &__container {
+      padding: 15px 10px;
+    }
+  }
+}
+
+.title {
+  margin: 0;
+  @include font(
+    (
+      fa: "Kanit",
+      si: 28px,
+      we: 700,
+      he: 28px,
+      co: #ae936c,
+    )
+  );
+  &__box {
+    @include d-flex(
+      (
+        al: center,
+        ju: space-between,
+      )
+    );
+    padding-bottom: 15px;
+  }
+}
+
+.btn {
+  @include throw(btn);
+  &__close {
+    & svg {
+      & > rect,
+      & > path {
+        @include transitions((stroke, fill));
+      }
+    }
+    &:hover svg,
+    &:focus svg {
+      & > rect {
+        @include transitions(
+          (stroke, fill),
+          (
+            stroke: #f1d5af,
+            fill: #f1d5af,
+          )
+        );
+      }
+      & > path {
+        @include transition(fill, #fff);
+      }
+    }
+    &:active svg {
+      & > rect {
+        @include transitions(
+          (stroke, fill),
+          (
+            stroke: #ae936c,
+            fill: #ae936c,
+          )
+        );
+      }
+      & > path {
+        @include transition(fill, #fff);
+      }
+    }
+  }
+  &__yummy {
+    @include bordered-padding(2px solid #ffca28, 5px, all, 5px 8px);
+    @include font(
+      (
+        si: 20px,
+        we: 700,
+        co: #fff,
+      )
+    );
+    background-color: #ffca28;
+    @include transitions((border-color, background-color, color));
+    &:hover,
+    &:focus {
+      @include transitions(
+        (background-color, color),
+        (
+          background-color: #fff,
+          color: #ffca28,
+        )
+      );
+    }
+    &:active {
+      @include transitions(
+        (border-color, background-color, color),
+        (
+          border-color: #e4ab00,
+          background-color: #e4ab00,
+          color: #fff,
+        )
+      );
+    }
+  }
+}
+
+.list {
+  @include throw(li);
+  padding-right: 15px;
+}
+
+.item {
+  &:not(:last-child) {
+    margin-bottom: 15px;
+  }
+}
+
+.message {
+  @extend %notification;
+  margin-bottom: 15px;
+  font-size: 25px;
+  &__box {
+    @include d-flex(
+      (
+        al: center,
+        di: column,
+      )
+    );
+  }
+}
+
+.order {
+  &__box {
+    @include d-flex(
+      (
+        al: center,
+        di: column,
+      )
+    );
+    padding-top: 15px;
+  }
+  &__desc {
+    position: relative;
+    overflow: hidden;
+    @include d-flex(
+      (
+        al: center,
+        ju: space-between,
+      )
+    );
+    width: 100%;
+    margin: 0 0 15px 0;
+    & span {
+      z-index: 2;
+      background-color: #fff;
+      @include font(
+        (
+          we: 700,
+          co: #ae936c,
+        )
+      );
+      &:first-child {
+        padding-right: 5px;
+      }
+      &:last-child {
+        padding-left: 5px;
+      }
+    }
+    &::after {
+      position: absolute;
+      content: ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ";
+      display: block;
+      white-space: nowrap;
+      overflow: hidden;
+      z-index: 1;
+    }
+  }
+  &__btn {
+    @extend %redBtn;
+    padding: 14px 16px;
+  }
+}

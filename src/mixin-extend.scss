@@ -1,0 +1,218 @@
+@import "./mixins/throw";
+@import "./mixins/display";
+@import "./mixins/block-size";
+@import "./mixins/image";
+@import "./mixins/font";
+@import "./mixins/animation";
+
+@mixin logo($width, $margin-bottom: 15px) {
+  margin: 0 0 $margin-bottom 0;
+  @include font(
+    (
+      fa: "Kanit",
+      si: 27px,
+      we: 700,
+      he: 27px,
+    )
+  );
+  &__link {
+    @include d-flex(
+      (
+        al: center,
+      )
+    );
+    overflow: hidden;
+    white-space: nowrap;
+    text-decoration: none;
+    width: $width;
+    padding-bottom: 2.5px;
+    outline-offset: 5px;
+    outline: 2px solid transparent;
+    letter-spacing: 0.2px;
+    color: #fff;
+    text-shadow: 1px 1px #b5b5b5, 1.5px 1.5px #c2c0c0;
+    @include transition(outline-color);
+    & span {
+      color: #ff314f;
+      text-shadow: 1px 1px #a34545, 1.5px 1.5px #ff6f6f;
+    }
+    & svg {
+      @include block-size(40px, 40px);
+      margin-right: 8px;
+      border-radius: 100%;
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 71%);
+      & > path,
+      & > circle {
+        @include transition(fill);
+      }
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      @include transition(outline-color, #ff314f);
+    }
+  }
+  @media (max-width: 675px) {
+    @include font(
+      (
+        si: 20px,
+        he: 20px,
+      )
+    );
+    &__link {
+      & svg {
+        @include block-size(25px, 25px);
+        box-shadow: 0px 1px 1px rgba(0, 0, 0, 71%);
+      }
+    }
+  }
+}
+
+@mixin bordered-padding($value: 0, $radius: 0, $position: all, $padding: 0) {
+  @if $value != 0 {
+    border: $value;
+  }
+  @if $position != all {
+    border: 0;
+    border-#{$position}: $value;
+  }
+  @if $radius != 0 {
+    border-radius: $radius;
+  }
+  @if $padding != 0 {
+    padding: $padding;
+  }
+}
+
+@mixin modal($action) {
+  @include animation(
+    (
+      opacity: if($action == open, 0, 1),
+      transform: if($action == open, scale(0), scale(1)),
+    ),
+    (
+      opacity: if($action == close, 0, 1),
+      transform: if($action == close, scale(0), scale(1)),
+    )
+  );
+}
+
+@mixin modal-Y($action, $offset: 100px) {
+  @include animation(
+    (
+      opacity: if($action == open, 0, 1),
+      transform: if($action == open, translateY($offset), translateY(0)),
+    ),
+    (
+      opacity: if($action == close, 0, 1),
+      transform: if($action == close, translateY($offset), translateY(0)),
+    )
+  );
+}
+
+@mixin modal-X($action) {
+  @include animation(
+    (
+      opacity: if($action == open, 0, 1),
+      transform: if($action == open, translateX(1000px), translateX(0)),
+    ),
+    (
+      opacity: if($action == close, 0, 1),
+      transform: if($action == close, translateX(1000px), translateX(0)),
+    )
+  );
+}
+
+@mixin visibility($action) {
+  @include animation(
+    (
+      opacity: if($action == visible, 0, 1),
+    ),
+    (
+      opacity: if($action == hidden, 0, 1),
+    )
+  );
+}
+
+@mixin accordion($action) {
+  @include animation(
+    (
+      max-height: if($action == visible, 0, 200px),
+    ),
+    (
+      max-height: if($action == hidden, 0, 200px),
+    )
+  );
+}
+
+%redBtn {
+  @include throw(btn);
+  @include bordered-padding(0, 5px, all, 7px 10px);
+  @include font(
+    (
+      si: 18px,
+      we: 700,
+      he: 18px,
+      co: #fff,
+    )
+  );
+  background-color: #ff314f;
+  @include transitions((color, background-color));
+  &:hover,
+  &:focus {
+    @include transitions(
+      (color, background-color),
+      (
+        color: #ff314f,
+        background-color: #fff,
+      )
+    );
+  }
+  &:active {
+    @include transitions(
+      (color, background-color),
+      (
+        color: #fff,
+        background-color: #ff314f,
+      )
+    );
+  }
+}
+
+%notification {
+  @include d-flex(
+    (
+      al: center,
+      ju: center,
+    )
+  );
+  margin: 0;
+  @include font(
+    (
+      si: 30px,
+      we: 700,
+      he: 20px,
+      co: #ffca28,
+    )
+  );
+  & img {
+    @include block-size(40px, 40px);
+    margin-left: 10px;
+  }
+}
+
+%loading {
+  @include d-flex(
+    (
+      al: center,
+      ju: center,
+    )
+  );
+  @include block-size(100%, 100%);
+  position: absolute;
+  cursor: default;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.9);
+}

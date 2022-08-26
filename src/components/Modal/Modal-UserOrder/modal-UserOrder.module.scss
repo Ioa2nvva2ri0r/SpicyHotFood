@@ -1,0 +1,299 @@
+@import "../../../mixin-extend.scss";
+
+.main {
+  @include d-flex(
+    (
+      al: center,
+      ju: center,
+    )
+  );
+  @include block-size(100%, 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0 10px;
+  z-index: 100;
+  background-color: #00000062;
+  @include modal(open);
+  &__close {
+    @include modal(close);
+  }
+}
+
+.form {
+  @include d-flex(
+    (
+      al: center,
+      ju: space-between,
+      di: column,
+    )
+  );
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  @include bordered-padding(0, 15px, all, 20px 20px 10px 20px);
+  background-color: #fff;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  width: 100%;
+  margin: 0 0 15px 0;
+  padding: 0 20px;
+  @include font(
+    (
+      si: 18px,
+      we: 700,
+      he: 18px,
+      co: #ae936c,
+    )
+  );
+}
+
+.desc {
+  text-align: center;
+  width: 100%;
+  margin: 0 0 15px 0;
+  @include font(
+    (
+      si: 12px,
+      we: 500,
+      he: 18px,
+      co: #ae936c,
+    )
+  );
+  &__box {
+    & h2 {
+      margin-bottom: 10px;
+    }
+  }
+  &__star {
+    text-align: center;
+    margin: 0;
+    @include font(
+      (
+        si: 10px,
+        we: 700,
+        he: 12px,
+        co: #ff314f,
+      )
+    );
+    & strong {
+      font-size: 11px;
+    }
+  }
+}
+
+.input {
+  cursor: pointer;
+  @include block-size(100%, 100%);
+  @include bordered-padding(2px solid #f1d5af, 5px, all, 6px 8px);
+  @include transitions((border-color, background-color, color));
+  &::placeholder {
+    @include font(
+      (
+        si: 13px,
+        we: 500,
+        he: 14px,
+        lsp: 0.4px,
+      )
+    );
+    @include transition(color);
+  }
+  &:hover::placeholder,
+  &:focus::placeholder {
+    @include transition(color, #fff);
+  }
+  &:hover {
+    @include transitions(
+      (border-color, background-color, color),
+      (
+        background-color: #f1d5af,
+        color: #fff,
+      )
+    );
+  }
+  &__container {
+    @include d-flex(
+      (
+        al: center,
+        ju: space-between,
+        di: column,
+      )
+    );
+    width: 100%;
+    padding-bottom: 15px;
+  }
+  &__box {
+    position: relative;
+    @include block-size(100%, 35px);
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+  }
+  &__star {
+    position: absolute;
+    top: 1px;
+    right: 5px;
+    color: #ff314f;
+  }
+  &__err {
+    border-color: #ff314f !important;
+  }
+}
+
+.btn {
+  @include throw(btn);
+  &__box {
+    &_exitDelete {
+      padding-bottom: 10px;
+      @include d-flex(
+        (
+          al: center,
+          ju: center,
+        )
+      );
+    }
+  }
+  &__close {
+    @include block-size(20px, 20px);
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    & svg {
+      @include block-size(20px, 20px);
+    }
+    & svg > path {
+      fill: #f1d5af;
+      transition: fill 0.4s ease-in-out;
+    }
+    &:hover svg > path,
+    &:focus svg > path,
+    &:active svg > path {
+      @include transition(fill, #ae936c);
+    }
+  }
+  &__submit {
+    margin-bottom: 10px;
+    @include bordered-padding(2px solid #f1d5af, 5px, all, 9px 30px);
+    color: #fff;
+    background-color: #f1d5af;
+    @include font(
+      (
+        si: 15px,
+        we: 700,
+        he: 15px,
+      )
+    );
+    @include transitions((border-color, background-color));
+    &:hover,
+    &:focus {
+      @include transitions(
+        (border-color, background-color),
+        (
+          background-color: #ae936c,
+        )
+      );
+    }
+    &:active {
+      @include transitions(
+        (border-color, background-color),
+        (
+          border-color: #ae936c,
+        )
+      );
+    }
+  }
+  &__create,
+  &__exit,
+  &__delete {
+    text-decoration: underline;
+    @include font(
+      (
+        si: 14px,
+        we: 700,
+        co: #ae936c,
+      )
+    );
+    @include transition(color);
+  }
+  &__create {
+    margin-bottom: 10px;
+    &:hover,
+    &:focus,
+    &:active {
+      @include transition(color, #f1d5af);
+    }
+  }
+  &__exit,
+  &__delete {
+    padding: 0 5px;
+    &:hover,
+    &:focus,
+    &:active {
+      @include transition(color, #ff314f);
+    }
+  }
+}
+
+.messageErr {
+  text-align: center;
+  margin: 0;
+  overflow: hidden;
+  @include font(
+    (
+      si: 12px,
+      we: 700,
+      he: 15px,
+      co: #ff314f,
+    )
+  );
+  @include accordion(visible);
+  &__close {
+    @include accordion(hidden);
+  }
+}
+
+.messageAffirmative {
+  @include d-flex(
+    (
+      al: center,
+      ju: center,
+    )
+  );
+  @include block-size(100%, 100%);
+  position: absolute;
+  text-align: center;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  margin: 0;
+  padding: 20px;
+  background-color: #fff;
+  @include font(
+    (
+      si: 25px,
+      we: 700,
+      co: #ae936c,
+    )
+  );
+  @include visibility(visible);
+}
+
+.loading {
+  @include d-flex(
+    (
+      al: center,
+      ju: center,
+    )
+  );
+  @include block-size(100%, 100%);
+  position: absolute;
+  cursor: default;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.9);
+}

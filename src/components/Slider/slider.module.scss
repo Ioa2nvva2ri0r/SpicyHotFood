@@ -1,0 +1,107 @@
+@import "../../mixin-extend.scss";
+
+.main {
+  height: 400px;
+  border-radius: 15px;
+  &__container {
+    border-radius: 15px;
+    padding-top: 30px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.05);
+  }
+  @media (max-width: 675px) {
+    &__container {
+      padding-top: 15px;
+    }
+  }
+}
+
+.content {
+  position: relative;
+  overflow: hidden;
+  @include block-size(100%, 100%);
+  padding: 40px 30px;
+}
+
+.btn {
+  &__prev,
+  &__next {
+    @include throw(btn);
+    z-index: 100;
+  }
+}
+
+.img {
+  @include picture(100%, 100%);
+  &__box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    @include block-size(100%, 100%);
+  }
+}
+
+.desc {
+  @include d-flex(
+    (
+      al: center,
+      ju: space-around,
+    )
+  );
+  text-align: center;
+  margin: 0;
+  @include block-size(100%, 100%);
+  @include font(
+    (
+      si: 40px,
+      we: 500,
+      co: #fff,
+    )
+  );
+  & span,
+  & strong {
+    @include d-flex(
+      (
+        ju: center,
+      )
+    );
+    height: 100%;
+    text-shadow: 1px 1px #b5b5b5, 1.5px 1.5px #c2c0c0;
+  }
+  &__start {
+    align-items: flex-start;
+  }
+  &__center {
+    align-items: center;
+  }
+  &__end {
+    align-items: flex-end;
+  }
+  &__name {
+    max-width: 550px;
+    align-items: center;
+    @include font(
+      (
+        si: 45px,
+        we: 700,
+        co: #fff,
+      )
+    );
+    text-shadow: 1px 1px #a34545, 1.5px 1.5px #ff6f6f !important;
+  }
+  &__note {
+    text-transform: uppercase;
+    @include font(
+      (
+        si: 50px,
+        we: 700,
+      )
+    );
+    &_red {
+      color: #ff0026;
+    }
+    &_mw {
+      max-width: 320px;
+    }
+  }
+}

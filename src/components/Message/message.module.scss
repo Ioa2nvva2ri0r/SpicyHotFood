@@ -1,0 +1,45 @@
+@import "../../mixin-extend.scss";
+
+.main {
+  @include d-flex(
+    (
+      al: center,
+      ju: flex-end,
+    )
+  );
+  @include block-size(100%, 50px);
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  background-color: #ffffffa6;
+  padding: 0 20px;
+  @include modal-Y(open);
+  &__close {
+    @include modal-Y(close);
+  }
+  & p {
+    overflow: hidden;
+    margin: 0;
+    @include font(
+      (
+        si: 25px,
+        we: 700,
+        he: 25px,
+        whsp: nowrap,
+        t-over: ellipsis,
+        co: #ae936c,
+      )
+    );
+  }
+  @media (max-width: 1115px) {
+    & p {
+      @include font(
+        (
+          si: 20px,
+          he: 20px,
+        )
+      );
+    }
+  }
+}

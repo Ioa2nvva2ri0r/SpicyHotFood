@@ -1,0 +1,83 @@
+@import "../../../../mixin-extend.scss";
+
+.main {
+  @include d-flex(
+    (
+      al: center,
+    )
+  );
+}
+
+.img {
+  @include picture(100px, 100px);
+  border-radius: 10px;
+  &__box {
+    margin-right: 10px;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.05);
+  }
+  @media (max-width: 420px) {
+    @include picture(90px, 90px);
+  }
+}
+
+.title {
+  margin: 0 0 10px;
+  @include font(
+    (
+      si: 15px,
+      co: #786344,
+    )
+  );
+}
+
+.content {
+  @include d-flex(
+    (
+      di: column,
+    )
+  );
+  margin: 0;
+  font-size: 14px;
+  & span {
+    color: #786344;
+  }
+  & strong {
+    margin-right: 5px;
+    color: #fff;
+  }
+  &__box {
+    @include d-flex(
+      (
+        di: column,
+        ju: space-between,
+      )
+    );
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+    margin-right: 5px;
+    @include bordered-padding(0, 10px, all, 5px 8px);
+    background: linear-gradient(90deg, rgba(241, 202, 164, 0.795) 40%, rgba(240, 241, 208, 0.844) 80%);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.btn {
+  @include throw(btn);
+  min-width: 20px;
+  @include block-size(20px, 20px);
+  margin-bottom: auto;
+  border-radius: 100%;
+  box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.05);
+  & svg {
+    @include block-size(20px, 20px);
+    & > path {
+      @include transition(fill);
+    }
+  }
+  &:hover svg > path,
+  &:focus svg > path,
+  &:active svg > path {
+    @include transition(fill, #f1d5af);
+  }
+}

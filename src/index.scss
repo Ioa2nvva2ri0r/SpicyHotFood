@@ -1,0 +1,95 @@
+@import "./mixin-extend.scss";
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  user-select: none;
+  min-width: 320px;
+  margin: 0 auto;
+  font-family: "Open Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  background: linear-gradient(#f1cba4, #f0f1d0);
+  color: #000000;
+}
+
+button,
+input {
+  &:focus {
+    outline: none;
+  }
+}
+
+.container {
+  overflow: hidden;
+  width: 100%;
+  min-width: 320px;
+  max-width: 1450px;
+  margin: 0 auto;
+  padding: 20px 40px;
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.9);
+  @media (max-width: 860px) {
+    padding: 15px;
+  }
+  @media (max-width: 420px) {
+    padding: 10px;
+  }
+}
+
+// Swiper-Slider
+.swiper {
+  &-pagination {
+    &-bullet {
+      width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 9px)) !important;
+      height: var(--swiper-pagination-bullet-height, var(--swiper-pagination-bullet-size, 9px)) !important;
+      margin: 0 6px !important;
+      border: 1px solid #f30024;
+      @include transition(background-color);
+      &:hover,
+      &:focus,
+      &:active {
+        @include transition(background-color, #ff314f);
+      }
+      &-active {
+        background: #ff314f !important;
+      }
+    }
+  }
+  &__btn {
+    &-prev {
+      left: 10px;
+      & svg {
+        margin: -1px 2px 0 0;
+      }
+    }
+    &-next {
+      right: 10px;
+      & svg {
+        margin: -1px 0 0 2px;
+      }
+    }
+  }
+}
+
+.simplebar {
+  &-mask {
+    border-radius: 10px;
+  }
+  &-track.simplebar-vertical {
+    cursor: pointer;
+    width: 13px !important;
+  }
+  &-scrollbar {
+    cursor: pointer;
+    &:before {
+      cursor: pointer;
+      background-color: #ae936c !important;
+    }
+  }
+}

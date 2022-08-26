@@ -1,0 +1,19 @@
+@mixin throw($selector) {
+  @if $selector == desc {
+    margin: 0;
+    padding: 0;
+  } @else if $selector == li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  } @else if $selector == btn {
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 185px;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+  }
+}

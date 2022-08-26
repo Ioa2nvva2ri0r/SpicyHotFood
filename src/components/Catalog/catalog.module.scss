@@ -1,0 +1,153 @@
+@import "../../mixin-extend.scss";
+
+.main {
+  min-height: 650px;
+  padding: 30px 0;
+  @media (max-width: 675px) {
+    background: linear-gradient(#ffe4c917, #feffe13d);
+    padding: 30px 5px;
+  }
+}
+
+.title {
+  min-width: 300px;
+  max-width: 400px;
+  margin: 0 100px 0 0;
+  @include font(
+    (
+      fa: "Kanit",
+      si: 30px,
+      we: 700,
+      he: 60px,
+      co: #ff002689,
+    )
+  );
+  & strong {
+    @include font(
+      (
+        we: 700,
+        co: #ae936c,
+      )
+    );
+  }
+  &__box {
+    @include d-flex(
+      (
+        al: center,
+        ju: space-between,
+        wr: wrap,
+      )
+    );
+    margin-bottom: 30px;
+  }
+  &__quotes {
+    margin: 0 2px;
+    @include font(
+      (
+        si: 25px,
+        we: 500,
+        he: 25px,
+        co: #ae936c,
+      )
+    );
+  }
+  @media (max-width: 675px) {
+    font-size: 25px;
+  }
+}
+
+.input {
+  cursor: pointer;
+  @include bordered-padding(1px solid #d3d3d3, 3px, bottom, 0 5px 2px 2px);
+  @include font(
+    (
+      si: 17px,
+      we: 500,
+      he: 15px,
+      co: #000000,
+    )
+  );
+  @include transition(border-color);
+  &::placeholder {
+    @include font(
+      (
+        si: 17px,
+        we: 500,
+        he: 15px,
+        co: #d3d3d3,
+      )
+    );
+    @include transition(color);
+  }
+  & + label {
+    & svg {
+      @include block-size(18px, 18px);
+    }
+    & svg > path {
+      @include transition(stroke);
+    }
+  }
+  &:hover::placeholder,
+  &:focus::placeholder {
+    @include transition(color, #f1d5af);
+  }
+  &:hover + label,
+  &:focus + label {
+    & svg > path {
+      @include transition(stroke, #f1d5af);
+    }
+  }
+  &:active::placeholder {
+    @include transition(color, #ae936c);
+  }
+  &:active + label {
+    & svg > path {
+      @include transition(stroke, #ae936c);
+    }
+  }
+  &__box {
+    @include d-flex(
+      (
+        al: center,
+        di: row-reverse,
+      )
+    );
+  }
+  &__label {
+    @include d-flex(
+      (
+        al: center,
+      )
+    );
+    cursor: pointer;
+    margin-right: 6px;
+  }
+  @media (max-width: 675px) {
+    background-color: #f1cba400;
+  }
+}
+
+.list {
+  @include throw(li);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 15px;
+  @media (max-width: 675px) {
+    grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
+  }
+}
+
+.item {
+  @include bordered-padding(1px solid #f3f3f3, 40px, all, 20px);
+  background-color: #fff;
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.05);
+  @media (max-width: 675px) {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+.message {
+  @extend %notification;
+}

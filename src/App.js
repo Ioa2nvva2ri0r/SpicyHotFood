@@ -1,24 +1,211 @@
-import logo from './logo.svg';
-import './App.css';
+/* eslint-disable no-undef */
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+// Auxiliary Functions
+import {
+  dataAPI,
+  dataLocalStorage,
+} from './auxiliary-functions/DataProcessing';
+import { checkingPathNameURL } from './auxiliary-functions/ValueСheck';
+import { calculationCost } from './auxiliary-functions/CalculationCost';
+import { discount } from './auxiliary-functions/Discount';
+// Components
+import Header from './components/Header/Header';
+import Main from './components/Main/Main';
+import Footer from './components/Footer/Footer';
+import Message from './components/Message/Message';
+import ModalBasket from './components/Modal/Modal-Basket/ModalBasket';
+import ModalUserOrder from './components/Modal/Modal-UserOrder/ModalUserOrder';
+
+export const AppContext = React.createContext({});
 
 function App() {
+  // Main
+  const [dataApi, setDataApi] = React.useState([]);
+  const [arrayCategory, setArrayCategory] = React.useState([]);
+  const [category, setCategory] = React.useState({
+    name: checkingPathNameURL(location.pathname),
+    path: location.pathname,
+  });
+  const [preloaderCatalog, setPreloaderCatalog] = React.useState(false);
+  // Basket
+  const [dataBasket, setDataBasket] = React.useState([]);
+  const [modalBasket, setModalBasket] = React.useState(false);
+  // Favorite
+  const [dataFavorite, setDataFavorite] = React.useState([]);
+  // Basket-Favorite
+  const [changeDataBasketFavorite, setChangeDataBasketFavorite] =
+    React.useState({});
+  // User-Order
+  const [dataApiUser, setDataApiUser] = React.useState([]);
+  const [completeOrder, setCompleteOrder] = React.useState(false);
+  const [changeDataUserOrder, setChangeDataUserOrder] = React.useState({});
+  const [preloaderUserOrder, setPreloaderUserOrder] = React.useState(false);
+  const [modalUserOrder, setModalUserOrder] = React.useState(false);
+  const [modalUserOrOrder, setModalUserOrOrder] = React.useState('');
+  const [messageUserOrOrder, setMessageUserOrOrder] = React.useState('');
+  // Final Cost
+  const [finalCost, setFinalCost] = React.useState(0);
+  const [discountWeekdays, setDiscountWeekdays] = React.useState(0);
+  // Message Output
+  const [messageOutput, setMessageOutput] = React.useState(false);
+
+  // Screen Size
+  const [screenSize, setScreenSize] = React.useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
+  React.useLayoutEffect(() => {
+    window.addEventListener('resize', () => {
+      setScreenSize([window.innerWidth, window.innerHeight]);
+    });
+  }, []);
+
+  // GET-Data-API -> Catalog  &&  // GET-Data-LocalStorage -> Favorite
+  React.useEffect(() => {
+    dataAPI(
+      { path: 'food', method: 'GET', category: category.name },
+      {
+        funGetData: setDataApi,
+        funGetCategories: setArrayCategory,
+        funLoading: setPreloaderCatalog,
+      }
+    );
+    dataLocalStorage({ method: 'GET', key: 'favorite' }, setDataFavorite);
+  }, [location.pathname]);
+
+  // GET-Data-API -> User
+  React.useEffect(() => {
+    dataAPI(
+      { path: 'user', method: 'GET' },
+      {
+        funGetData: setDataApiUser,
+        funLoading: setPreloaderUserOrder,
+      }
+    );
+  }, [modalUserOrder]);
+
+  // GET-Data-LocalStorage -> Basket
+  React.useEffect(() => {
+    dataLocalStorage({ method: 'GET', key: 'basket' }, setDataBasket);
+    setDiscountWeekdays(
+      discount({ day: 'weekdays' }, '11-14', 10) +
+        discount(
+          {
+            week: 4,
+            day: 'tuesday',
+          },
+          '11-17',
+          50
+        )
+    );
+  }, [modalBasket]);
+
+  // Change Final Cost Basket
+  React.useEffect(() => {
+    setFinalCost(
+      dataBasket
+        .map((obj) =>
+          calculationCost(obj.category, obj.amount, obj.size, obj.price, true)
+        )
+        .reduce((prev, curr) => prev + curr, 0)
+    );
+  }, [dataBasket]);
+
+  // Change Data -> Basket & Favorite
+  React.useEffect(() => {
+    if (Object.keys(changeDataBasketFavorite).length !== 0)
+      dataLocalStorage(
+        {
+          method: changeDataBasketFavorite.method,
+          key: changeDataBasketFavorite.category,
+          data: changeDataBasketFavorite.data,
+        },
+        changeDataBasketFavorite.category === 'basket'
+          ? setDataBasket
+          : setDataFavorite,
+        setMessageOutput
+      );
+  }, [changeDataBasketFavorite]);
+
+  React.useEffect(() => {
+    if (Object.keys(changeDataUserOrder).length !== 0) {
+      dataAPI(
+        {
+          path: changeDataUserOrder.path,
+          method: changeDataUserOrder.method,
+          id: changeDataUserOrder.id,
+          data: changeDataUserOrder.data,
+          process: changeDataUserOrder.process,
+        },
+        {
+          funGetData: setDataApiUser,
+          funLoading: setPreloaderUserOrder,
+          funGetMessage: setMessageUserOrOrder,
+        }
+      );
+    }
+  }, [changeDataUserOrder]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider
+      value={{
+        screenSize,
+        API: {
+          data: dataApi,
+          loading: preloaderCatalog,
+        },
+        category: {
+          active: category,
+          array: arrayCategory,
+          funCategory: setCategory,
+        },
+        basket: {
+          data: dataBasket,
+          length: dataBasket.length,
+          modal: modalBasket,
+          funChange: setChangeDataBasketFavorite,
+          funModal: setModalBasket,
+        },
+        favorite: {
+          data: dataFavorite,
+          length: dataFavorite.length,
+        },
+        order: {
+          complete: completeOrder,
+          funComplete: setCompleteOrder,
+        },
+        userOrder: {
+          active: modalUserOrOrder,
+          funActive: setModalUserOrOrder,
+          funModal: setModalUserOrder,
+        },
+        finalCost,
+        discount: discountWeekdays,
+      }}
+    >
+      <div className="container">
+        <Header />
+        <Routes>
+          <Route path={category.path} element={<Main path={category.path} />} />
+        </Routes>
+        <Footer />
+        {modalBasket && <ModalBasket />}
+        {modalUserOrder && (
+          <ModalUserOrder
+            dataUsers={dataApiUser}
+            message={messageUserOrOrder}
+            loading={preloaderUserOrder}
+            funСhangingData={setChangeDataUserOrder}
+            funMessage={setMessageUserOrOrder}
+            funLoading={setPreloaderUserOrder}
+          />
+        )}
+        {messageOutput !== false ? (
+          <Message message={messageOutput} funMessage={setMessageOutput} />
+        ) : null}
+      </div>
+    </AppContext.Provider>
   );
 }
 

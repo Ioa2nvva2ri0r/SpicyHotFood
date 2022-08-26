@@ -1,0 +1,25 @@
+@mixin font($props) {
+  @each $prop, $value in $props {
+    $newProp: null;
+    @if $prop == fa {
+      $newProp: font-family;
+    } @else if $prop == si {
+      $newProp: font-size;
+    } @else if $prop == we {
+      $newProp: font-weight;
+    } @else if $prop == he {
+      $newProp: line-height;
+    } @else if $prop == lsp {
+      $newProp: letter-spacing;
+    } @else if $prop == wsp {
+      $newProp: word-spacing;
+    } @else if $prop == whsp {
+      $newProp: white-space;
+    } @else if $prop == t-over {
+      $newProp: text-overflow;
+    } @else if $prop == co {
+      $newProp: color;
+    }
+    #{$newProp}: $value;
+  }
+}
