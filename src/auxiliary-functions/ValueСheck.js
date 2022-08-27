@@ -4,19 +4,13 @@ export function checkingUserName() {
 }
 
 export function checkingPathNameURL(path) {
-  return path === '/'
-    ? 'Популярные'
-    : path === '/pizza'
-    ? 'Пицца'
-    : path === '/sushi'
-    ? 'Суши'
-    : path === '/burrito'
-    ? 'Буррито'
-    : path === '/taco'
-    ? 'Тако'
-    : path === '/desserts'
-    ? 'Десерты'
-    : path === '/favorite'
-    ? 'Избранные'
-    : '';
+  return [
+    { name: 'Популярные', path: 'popular' },
+    { name: 'Пицца', path: 'pizza' },
+    { name: 'Суши', path: 'sushi' },
+    { name: 'Буррито', path: 'burrito' },
+    { name: 'Тако', path: 'taco' },
+    { name: 'Десерты', path: 'desserts' },
+    { name: 'Избранные', path: 'favorite' },
+  ].filter((el) => path.includes(el.path) && el)[0];
 }

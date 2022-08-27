@@ -11,7 +11,7 @@ const Logo = ({ className }) => {
   const upsmoothScroll = () => {
     category.funCategory({
       name: 'Популярные',
-      path: '/',
+      path: 'popular',
     });
     return window.scroll({
       top: 0,
@@ -21,7 +21,7 @@ const Logo = ({ className }) => {
 
   return (
     <h1 className={className.logo} onClick={upsmoothScroll}>
-      <Link to="/" className={className.logo__link}>
+      <Link to="popular" className={className.logo__link}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           x="0px"

@@ -2,7 +2,7 @@
   "name": "spicy_hot_food",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://yuribenjamin.github.io/",
+  "homepage": "https://ioa2nvva2ri0r.github.io/Spicy_HotFOOD/",
   "dependencies": {
     "@react-spring/web": "^9.5.2",
     "@testing-library/jest-dom": "^5.16.4",
@@ -52,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-config-prettier": "^8.5.0",

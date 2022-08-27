@@ -22,7 +22,7 @@ const Pages = ({ pages, activePage, funSwitchPage }) => {
           onClick={() => onClickBtnPage(page)}
         >
           <Link
-            to={`${location.pathname}?page=${page}`}
+            to={`?page=${page}`}
             className={`${styles.pages__link} ${
               activePage === page ? styles.pages__link_active : ''
             }`}

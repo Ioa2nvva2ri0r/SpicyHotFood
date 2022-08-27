@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 // Auxiliary Functions
@@ -23,10 +22,9 @@ function App() {
   // Main
   const [dataApi, setDataApi] = React.useState([]);
   const [arrayCategory, setArrayCategory] = React.useState([]);
-  const [category, setCategory] = React.useState({
-    name: checkingPathNameURL(location.pathname),
-    path: location.pathname,
-  });
+  const [category, setCategory] = React.useState(
+    checkingPathNameURL(location.pathname)
+  );
   const [preloaderCatalog, setPreloaderCatalog] = React.useState(false);
   // Basket
   const [dataBasket, setDataBasket] = React.useState([]);

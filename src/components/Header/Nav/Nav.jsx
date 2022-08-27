@@ -176,18 +176,18 @@ const Nav = ({ className }) => {
                   btn === 'favorite' &&
                   category.funCategory({
                     name: 'Избранные',
-                    path: '/favorite',
+                    path: 'favorite',
                   })
                 }
               >
                 {btn === 'favorite' ? (
                   <Link
-                    to="/favorite"
+                    to="favorite"
                     id={btn}
                     className={`${className.nav__btn} ${
                       className.nav__btn_favorite
                     } ${
-                      category.active.path === '/favorite'
+                      category.active.path === 'favorite'
                         ? className.nav__btn_favorite__active
                         : ''
                     }`}
