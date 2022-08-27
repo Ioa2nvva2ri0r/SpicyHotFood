@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 // Auxiliary Functions
@@ -17,13 +18,19 @@ import ModalBasket from './components/Modal/Modal-Basket/ModalBasket';
 import ModalUserOrder from './components/Modal/Modal-UserOrder/ModalUserOrder';
 
 export const AppContext = React.createContext({});
-
+console.log(process.env.PUBLIC_URL === location.pathname);
 function App() {
   // Main
   const [dataApi, setDataApi] = React.useState([]);
   const [arrayCategory, setArrayCategory] = React.useState([]);
   const [category, setCategory] = React.useState(
-    checkingPathNameURL(location.pathname)
+    process.env.PUBLIC_URL === location.pathname ||
+      `${process.env.PUBLIC_URL}/` === location.pathname
+      ? {
+          name: 'Популярные',
+          path: '/',
+        }
+      : checkingPathNameURL(location.pathname)
   );
   const [preloaderCatalog, setPreloaderCatalog] = React.useState(false);
   // Basket
@@ -70,7 +77,8 @@ function App() {
       }
     );
     dataLocalStorage({ method: 'GET', key: 'favorite' }, setDataFavorite);
-  }, [location.pathname]);
+  }, [category]);
+  console.log(category);
 
   // GET-Data-API -> User
   React.useEffect(() => {
