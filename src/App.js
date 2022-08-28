@@ -17,20 +17,20 @@ import Message from './components/Message/Message';
 import ModalBasket from './components/Modal/Modal-Basket/ModalBasket';
 import ModalUserOrder from './components/Modal/Modal-UserOrder/ModalUserOrder';
 
+// Context
 export const AppContext = React.createContext({});
-console.log(process.env.PUBLIC_URL === location.pathname);
+
 function App() {
   // Main
   const [dataApi, setDataApi] = React.useState([]);
   const [arrayCategory, setArrayCategory] = React.useState([]);
   const [category, setCategory] = React.useState(
-    process.env.PUBLIC_URL === location.pathname ||
-      `${process.env.PUBLIC_URL}/` === location.pathname
-      ? {
+    new URLSearchParams(location.search).has('p')
+      ? checkingPathNameURL(location.search)
+      : {
           name: 'Популярные',
           path: '/',
         }
-      : checkingPathNameURL(location.pathname)
   );
   const [preloaderCatalog, setPreloaderCatalog] = React.useState(false);
   // Basket
@@ -78,7 +78,6 @@ function App() {
     );
     dataLocalStorage({ method: 'GET', key: 'favorite' }, setDataFavorite);
   }, [category]);
-  console.log(category);
 
   // GET-Data-API -> User
   React.useEffect(() => {
@@ -193,7 +192,7 @@ function App() {
       <div className="container">
         <Header />
         <Routes>
-          <Route path={category.path} element={<Main path={category.path} />} />
+          <Route path={'/'} element={<Main path={category.path} />} />
         </Routes>
         <Footer />
         {modalBasket && <ModalBasket />}

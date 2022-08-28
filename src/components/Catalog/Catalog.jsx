@@ -16,9 +16,7 @@ import styles from './catalog.module.scss';
 
 const Catalog = ({ data }) => {
   const initPage = Number(
-    new URLSearchParams(location.search).has('page')
-      ? new URLSearchParams(location.search).get('page')
-      : 1
+    location.hash !== null && location.hash !== '' ? location.hash.slice(1) : 1
   );
   // React-Context
   const { screenSize, category, basket, favorite } =

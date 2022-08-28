@@ -2,12 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
+// Context
+import { AppContext } from '../../../App';
 // Auxiliary Functions
 import { smoothScroll } from '../../../auxiliary-functions/SmoothScroll';
 // Styles
 import styles from './pages.module.scss';
 
 const Pages = ({ pages, activePage, funSwitchPage }) => {
+  // React-Context
+  const { category } = React.useContext(AppContext);
+
   const onClickBtnPage = (value) => {
     funSwitchPage(value);
     smoothScroll('#category', 100);
@@ -22,7 +27,7 @@ const Pages = ({ pages, activePage, funSwitchPage }) => {
           onClick={() => onClickBtnPage(page)}
         >
           <Link
-            to={`?page=${page}`}
+            to={`${category.active.path}#${page}`}
             className={`${styles.pages__link} ${
               activePage === page ? styles.pages__link_active : ''
             }`}

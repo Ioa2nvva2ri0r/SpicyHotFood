@@ -5,12 +5,12 @@ export function checkingUserName() {
 
 export function checkingPathNameURL(path) {
   return [
-    { name: 'Популярные', path: 'popular' },
-    { name: 'Пицца', path: 'pizza' },
-    { name: 'Суши', path: 'sushi' },
-    { name: 'Буррито', path: 'burrito' },
-    { name: 'Тако', path: 'taco' },
-    { name: 'Десерты', path: 'desserts' },
-    { name: 'Избранные', path: 'favorite' },
+    { name: 'Популярные', path: '?p=/popular' },
+    { name: 'Пицца', path: '?p=/pizza' },
+    { name: 'Суши', path: '?p=/sushi' },
+    { name: 'Буррито', path: '?p=/burrito' },
+    { name: 'Тако', path: '?p=/taco' },
+    { name: 'Десерты', path: '?p=/desserts' },
+    { name: 'Избранные', path: '?p=/favorite' },
   ].filter((el) => path.includes(el.path) && el)[0];
 }
