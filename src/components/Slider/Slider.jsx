@@ -17,7 +17,7 @@ const Slider = () => {
       desc: (
         <>
           <span className={styles.desc__start}>При заказе </span>
-          <strong className={styles.desc__name}>
+          <strong className={`${styles.desc__name} ${styles.desc__m10}`}>
             «Пицца Пепперони на тонком тесте»
           </strong>{' '}
           <strong
@@ -50,7 +50,7 @@ const Slider = () => {
           <strong className={`${styles.desc__note} ${styles.desc__center}`}>
             ТОЛЬКО РАЗ В МЕСЯЦ!!!
           </strong>{' '}
-          <span className={styles.desc__center}>
+          <span className={`${styles.desc__m10} ${styles.desc__center}`}>
             Каждый четвёртый четверг месяца с 11.00 до 17.00
           </span>{' '}
           <strong
@@ -85,13 +85,13 @@ const Slider = () => {
         className={styles.main}
         modules={[Pagination, Autoplay, EffectFade]}
         spaceBetween={0}
-        // autoplay={{
-        //   delay: 7000,
-        //   disableOnInteraction: false,
-        // }}
-        // fadeEffect={{
-        //   crossFade: true,
-        // }}
+        autoplay={{
+          delay: 7000,
+          disableOnInteraction: false,
+        }}
+        fadeEffect={{
+          crossFade: true,
+        }}
         speed={800}
         pagination={{ clickable: true }}
       >

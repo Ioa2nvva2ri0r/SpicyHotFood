@@ -18,11 +18,12 @@
       fa: "Kanit",
       si: 30px,
       we: 700,
-      he: 60px,
+      he: 30px,
       co: #ff002689,
     )
   );
   & strong {
+    overflow-wrap: break-word;
     @include font(
       (
         we: 700,
@@ -122,6 +123,11 @@
     cursor: pointer;
     margin-right: 6px;
   }
+  @media (max-width: 860px) {
+    &__box {
+      padding-top: 10px;
+    }
+  }
   @media (max-width: 675px) {
     background-color: #f1cba400;
   }
@@ -150,4 +156,11 @@
 
 .message {
   @extend %notification;
+  font-size: 40px;
+  @media (max-width: 675px) {
+    font-size: 25px;
+  }
+  @media (max-width: 420px) {
+    font-size: 20px;
+  }
 }

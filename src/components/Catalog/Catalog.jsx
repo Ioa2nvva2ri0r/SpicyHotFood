@@ -10,9 +10,9 @@ import Title from './Title/Title';
 import Search from './Search/Search';
 import Card from './Card/Card';
 import Pages from './Pages/Pages';
-import IconSmile from './Catalog-icon/IconSmile';
 // Styles
 import styles from './catalog.module.scss';
+import Message from './Message/Message';
 
 const Catalog = ({ data }) => {
   const initPage = Number(
@@ -96,12 +96,13 @@ const Catalog = ({ data }) => {
             ))}
       </ul>
       {data.length === 0 && category.active.name === 'Избранные' && (
-        <p>Пусто</p>
+        <Message content="Увы но тут пусто..." className={styles.message} />
       )}
       {searchValue !== '' && newArray.length === 0 && (
-        <p className={styles.message}>
-          Увы! Но такого у нас нет... <IconSmile />
-        </p>
+        <Message
+          content="Увы! Но такого у нас нет..."
+          className={styles.message}
+        />
       )}
       {searchValue === '' && arrayPages.length > 1 && (
         <Pages

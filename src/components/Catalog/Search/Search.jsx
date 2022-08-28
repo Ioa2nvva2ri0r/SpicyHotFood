@@ -15,10 +15,12 @@ const Search = ({ value, funChangeValue, className }) => {
     <div className={className.input__box}>
       <input
         id="search"
+        name="search"
         className={className.input}
         placeholder="Поиск по разделу..."
         type="text"
         autoComplete="off"
+        maxLength={30}
         value={value}
         onChange={(event) =>
           changeValueInput(event, funChangeValue, '#d3d3d3', 'lower')

@@ -6,7 +6,7 @@ import { AppContext } from '../../../../App';
 import { animationClose } from '../../../../auxiliary-functions/AnimationClose';
 import { smoothScroll } from '../../../../auxiliary-functions/SmoothScroll';
 // Components
-import IconSmile from '../../../Catalog/Catalog-icon/IconSmile';
+import MessageCatalog from '../../../Catalog/Message/Message';
 
 const Message = ({ elemDOM, className }) => {
   // React-Context
@@ -21,9 +21,10 @@ const Message = ({ elemDOM, className }) => {
 
   return (
     <div className={className.message__box}>
-      <p className={className.message}>
-        Увы но тут пусто... <IconSmile />
-      </p>
+      <MessageCatalog
+        content="Увы но тут пусто..."
+        className={className.message}
+      />
       <button
         className={`${className.btn} ${className.btn__yummy}`}
         onClick={() => onClickBtnYummy()}

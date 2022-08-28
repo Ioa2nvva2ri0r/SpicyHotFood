@@ -42,4 +42,48 @@
       );
     }
   }
+  @media (max-width: 860px) {
+    height: 40px;
+    & p {
+      @include font(
+        (
+          si: 15px,
+          he: 15px,
+        )
+      );
+    }
+  }
+  @media (max-width: 675px) {
+    & p {
+      @include font(
+        (
+          si: 12px,
+          he: 12px,
+        )
+      );
+    }
+  }
+  @media (max-width: 545px) {
+    height: 25px;
+    padding: 0 10px;
+    & p {
+      @include font(
+        (
+          si: 10px,
+          he: 10px,
+        )
+      );
+    }
+  }
+  @media (max-width: 420px) {
+    height: 20px;
+    & p {
+      @include font(
+        (
+          si: 9px,
+          he: 9px,
+        )
+      );
+    }
+  }
 }

@@ -1,11 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import lazyImg from './lazy-img.svg';
 
 const Picture = ({ src, alt, className }) => {
   return (
     <picture>
-      <source className={className.img} srcSet={src} />
-      <img className={className.img} src={src} alt={alt} />
+      <source
+        className={`${className.img} lazyload`}
+        srcSet={lazyImg}
+        data-srcset={src}
+      />
+      <img
+        className={`${className.img} lazyload`}
+        src={lazyImg}
+        data-src={src}
+        alt={alt}
+      />
     </picture>
   );
 };

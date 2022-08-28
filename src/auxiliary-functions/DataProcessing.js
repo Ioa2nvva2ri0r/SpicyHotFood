@@ -29,6 +29,7 @@ export function dataAPI(options, allFunction) {
           allFunction.funGetMessage(
             `"${res.data.name}" благодарим за оставленную заявку, в ближайшее время мы свяжемся с Вами!`
           );
+          res.data.order !== undefined && localStorage.removeItem('basket');
         }
 
         if (options.method !== 'GET' && options.path === 'user') {

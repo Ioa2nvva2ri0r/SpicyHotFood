@@ -266,20 +266,24 @@
   @include block-size(100%, 100%);
   position: absolute;
   text-align: center;
+  overflow-wrap: anywhere;
   top: 0;
   left: 0;
   z-index: 50;
   margin: 0;
   padding: 20px;
-  background-color: #fff;
+  background-color: #ff314f;
   @include font(
     (
       si: 25px,
       we: 700,
-      co: #ae936c,
+      co: #fff,
     )
   );
   @include visibility(visible);
+  @media (max-width: 420px) {
+    font-size: 15px;
+  }
 }
 
 .loading {

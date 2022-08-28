@@ -1,6 +1,8 @@
-/* eslint-disable no-undef */
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+// lazysizes Image
+import 'lazysizes';
+import 'lazysizes/plugins/parent-fit/ls.parent-fit';
 // Auxiliary Functions
 import {
   dataAPI,
@@ -104,7 +106,7 @@ function App() {
           50
         )
     );
-  }, [modalBasket]);
+  }, [modalBasket, messageUserOrOrder]);
 
   // Change Final Cost Basket
   React.useEffect(() => {

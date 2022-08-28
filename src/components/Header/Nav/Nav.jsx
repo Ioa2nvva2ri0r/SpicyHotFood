@@ -128,7 +128,7 @@ const Nav = ({ className }) => {
                 content={<IconHeader icon="tel" />}
                 funNav={() => setTel(true)}
                 className={className.call}
-                aria-label="Позвонить"
+                ariaLabel="Позвонить"
               />
             )}
             {tel && (

@@ -9,9 +9,16 @@
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.05);
   }
   @media (max-width: 675px) {
+    height: 340px;
     &__container {
       padding-top: 15px;
     }
+  }
+  @media (max-width: 545px) {
+    height: 300px;
+  }
+  @media (max-width: 420px) {
+    height: 225px;
   }
 }
 
@@ -20,6 +27,12 @@
   overflow: hidden;
   @include block-size(100%, 100%);
   padding: 40px 30px;
+  @media (max-width: 1115px) {
+    padding: 40px 20px;
+  }
+  @media (max-width: 675px) {
+    padding: 30px 15px;
+  }
 }
 
 .btn {
@@ -48,6 +61,7 @@
       ju: space-around,
     )
   );
+  overflow: hidden;
   text-align: center;
   margin: 0;
   @include block-size(100%, 100%);
@@ -67,6 +81,9 @@
     );
     height: 100%;
     text-shadow: 1px 1px #b5b5b5, 1.5px 1.5px #c2c0c0;
+  }
+  &__m10 {
+    margin: 0 10px;
   }
   &__start {
     align-items: flex-start;
@@ -93,7 +110,7 @@
     text-transform: uppercase;
     @include font(
       (
-        si: 50px,
+        si: 45px,
         we: 700,
       )
     );
@@ -102,6 +119,58 @@
     }
     &_mw {
       max-width: 320px;
+    }
+  }
+  @media (max-width: 1115px) {
+    font-size: 30px;
+    &__name {
+      max-width: 415px;
+      font-size: 35px;
+    }
+    &__note {
+      font-size: 40px;
+    }
+    &_mw {
+      max-width: 260px;
+    }
+  }
+  @media (max-width: 860px) {
+    font-size: 25px;
+    &__name {
+      font-size: 28px;
+    }
+    &__note {
+      font-size: 35px;
+    }
+  }
+  @media (max-width: 675px) {
+    font-size: 20px;
+    &__name {
+      font-size: 23px;
+    }
+    &__note {
+      font-size: 30px;
+    }
+  }
+  @media (max-width: 545px) {
+    font-size: 15px;
+    &__name {
+      font-size: 18px;
+    }
+    &__note {
+      font-size: 20px;
+    }
+  }
+  @media (max-width: 420px) {
+    font-size: 12px;
+    &__name {
+      font-size: 15px;
+    }
+    &__note {
+      font-size: 18px;
+    }
+    &__m10 {
+      margin: 0 5px;
     }
   }
 }
