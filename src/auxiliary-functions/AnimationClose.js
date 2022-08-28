@@ -18,6 +18,7 @@ export function animationCloseCondition(
     !event.target.closest(btn) &&
     elem !== null &&
     !elem.contains(event.target)
-  )
+  ) {
     animationClose(closeElem, funClose, cssClass);
+  }
 }

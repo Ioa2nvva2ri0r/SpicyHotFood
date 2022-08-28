@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 // Context
 import { AppContext } from '../../../../App';
@@ -10,10 +11,14 @@ import MessageCatalog from '../../../Catalog/Message/Message';
 
 const Message = ({ elemDOM, className }) => {
   // React-Context
-  const { basket } = React.useContext(AppContext);
+  const { category, basket } = React.useContext(AppContext);
 
   const onClickBtnYummy = () => {
     animationClose(elemDOM.current, basket.funModal, className.main__close);
+    category.funCategory({
+      name: 'Популярные',
+      path: '/',
+    });
     setTimeout(() => {
       smoothScroll('#category', 100);
     }, 400);
@@ -25,12 +30,13 @@ const Message = ({ elemDOM, className }) => {
         content="Увы но тут пусто..."
         className={className.message}
       />
-      <button
-        className={`${className.btn} ${className.btn__yummy}`}
+      <Link
+        to="/"
+        className={className.link__yummy}
         onClick={() => onClickBtnYummy()}
       >
         За вкусняшкой!
-      </button>
+      </Link>
     </div>
   );
 };

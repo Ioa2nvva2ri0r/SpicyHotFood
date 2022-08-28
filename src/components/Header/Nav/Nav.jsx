@@ -76,7 +76,7 @@ const Nav = ({ className }) => {
       });
 
     if (menuRef.current !== undefined && widthСomparison420)
-      document.body.addEventListener('click', (event) => {
+      document.body.addEventListener('click', (event) =>
         animationCloseCondition(
           event,
           menuRef.current,
@@ -84,8 +84,8 @@ const Nav = ({ className }) => {
           menuRef.current,
           setMenu,
           className.nav__close
-        );
-      });
+        )
+      );
   }, [
     widthСomparison1115,
     widthСomparison420,

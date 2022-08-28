@@ -106,37 +106,10 @@
       }
     }
   }
+}
+.link {
   &__yummy {
-    @include bordered-padding(2px solid #ffca28, 5px, all, 5px 8px);
-    @include font(
-      (
-        si: 20px,
-        we: 700,
-        co: #fff,
-      )
-    );
-    background-color: #ffca28;
-    @include transitions((border-color, background-color, color));
-    &:hover,
-    &:focus {
-      @include transitions(
-        (background-color, color),
-        (
-          background-color: #fff,
-          color: #ffca28,
-        )
-      );
-    }
-    &:active {
-      @include transitions(
-        (border-color, background-color, color),
-        (
-          border-color: #e4ab00,
-          background-color: #e4ab00,
-          color: #fff,
-        )
-      );
-    }
+    @extend %yummyLink;
   }
 }
 

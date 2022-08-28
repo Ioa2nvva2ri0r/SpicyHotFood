@@ -1,10 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 // Context
 import { AppContext } from '../../App';
 // Auxiliary Functions
 import { transformationArray } from '../../auxiliary-functions/TransformationArray';
+import { smoothScroll } from '../../auxiliary-functions/SmoothScroll';
 // Components
 import Title from './Title/Title';
 import Search from './Search/Search';
@@ -65,9 +67,19 @@ const Catalog = ({ data }) => {
     page
   );
 
+  const onClickBtnYummy = () => {
+    category.funCategory({
+      name: 'Популярные',
+      path: '/',
+    });
+    setTimeout(() => {
+      smoothScroll('#category', 100);
+    }, 400);
+  };
+
   return (
     <section className={styles.main}>
-      {data.length !== 0 ? (
+      {data.length !== 0 && (
         <div className={styles.title__box}>
           <Title
             title={searchValue ? 'Поиск по значению:' : 'Раздел:'}
@@ -80,7 +92,7 @@ const Catalog = ({ data }) => {
             className={styles}
           />
         </div>
-      ) : null}
+      )}
       <ul className={styles.list}>
         {data.length !== 0
           ? newArray.map((item) => (
@@ -96,11 +108,21 @@ const Catalog = ({ data }) => {
             ))}
       </ul>
       {data.length === 0 && category.active.name === 'Избранные' && (
-        <Message content="Увы но тут пусто..." className={styles.message} />
+        <>
+          <Message content="Увы но тут пусто..." className={styles.message} />
+          <Link
+            to="/"
+            className={styles.link__yummy}
+            onClick={() => onClickBtnYummy()}
+          >
+            Вернуться назад
+          </Link>
+        </>
       )}
       {searchValue !== '' && newArray.length === 0 && (
         <Message
           content="Увы! Но такого у нас нет..."
+          style={{ minHeight: 'inherit' }}
           className={styles.message}
         />
       )}

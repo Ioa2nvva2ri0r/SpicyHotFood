@@ -1,7 +1,8 @@
 @import "../../mixin-extend.scss";
 
 .main {
-  min-height: 650px;
+  position: relative;
+  min-height: 400px;
   padding: 30px 0;
   @media (max-width: 675px) {
     background: linear-gradient(#ffe4c917, #feffe13d);
@@ -151,6 +152,15 @@
     max-width: 400px;
     width: 100%;
     margin: 0 auto;
+  }
+}
+
+.link {
+  &__yummy {
+    display: block;
+    width: max-content;
+    margin: 18px auto 0 auto;
+    @extend %yummyLink;
   }
 }
 

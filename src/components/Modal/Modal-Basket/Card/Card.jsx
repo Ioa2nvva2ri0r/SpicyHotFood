@@ -51,7 +51,7 @@ const ModalCard = ({ id, category, name, src, price, amount, size }) => {
         </p>
       </div>
       <button
-        className={styles.btn}
+        className={`${styles.btn} card__btn-close`}
         onClick={() =>
           basket.funChange({
             method: 'DELETE',

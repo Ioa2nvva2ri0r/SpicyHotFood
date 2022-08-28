@@ -15,7 +15,7 @@ import BtnClose from '../Modal-Basket/Button/BtnClose/BtnClose';
 // Styles
 import styles from './modal-Basket.module.scss';
 
-const Modal = () => {
+const ModalBasket = () => {
   // React-Context
   const { screenSize, basket } = React.useContext(AppContext);
   // React-State
@@ -29,14 +29,15 @@ const Modal = () => {
   React.useEffect(() => {
     if (modalContainerRef.current !== undefined)
       document.body.addEventListener('click', (event) => {
-        animationCloseCondition(
-          event,
-          modalContainerRef.current,
-          '#basket',
-          modalRef.current,
-          basket.funModal,
-          styles.main__close
-        );
+        if (!event.target.closest('.card__btn-close'))
+          animationCloseCondition(
+            event,
+            modalContainerRef.current,
+            '#basket',
+            modalRef.current,
+            basket.funModal,
+            styles.main__close
+          );
       });
 
     if (
@@ -92,4 +93,4 @@ const Modal = () => {
   );
 };
 
-export default Modal;
+export default ModalBasket;

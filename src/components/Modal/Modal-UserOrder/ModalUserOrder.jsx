@@ -126,7 +126,7 @@ const ModalUserTel = ({
           styles.main__close
         );
       });
-  }, [formRef]);
+  }, [formRef.current]);
 
   return (
     <div ref={modalRef} className={styles.main}>

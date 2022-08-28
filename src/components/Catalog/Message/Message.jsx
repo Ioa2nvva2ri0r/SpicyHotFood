@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 // Components
 import IconSmile from '../Catalog-icon/IconSmile';
 
-const Message = ({ content, className }) => {
+const Message = ({ content, className, style }) => {
   return (
-    <p className={className}>
+    <p className={className} style={style}>
       {content} <IconSmile />
     </p>
   );
@@ -14,6 +14,7 @@ const Message = ({ content, className }) => {
 Message.propTypes = {
   content: PropTypes.string,
   className: PropTypes.string,
+  style: PropTypes.object,
 };
 
 export default Message;
