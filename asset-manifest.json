@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/Spicy_HotFOOD/static/css/main.ad483949.css",
-    "main.js": "/Spicy_HotFOOD/static/js/main.34c30e6a.js",
+    "main.css": "/Spicy_HotFOOD/static/css/main.4906863e.css",
+    "main.js": "/Spicy_HotFOOD/static/js/main.e427361e.js",
     "static/media/Deliveryman.png": "/Spicy_HotFOOD/static/media/Deliveryman.317da28d683a298199e4.png",
     "index.html": "/Spicy_HotFOOD/index.html",
-    "main.ad483949.css.map": "/Spicy_HotFOOD/static/css/main.ad483949.css.map",
-    "main.34c30e6a.js.map": "/Spicy_HotFOOD/static/js/main.34c30e6a.js.map"
+    "main.4906863e.css.map": "/Spicy_HotFOOD/static/css/main.4906863e.css.map",
+    "main.e427361e.js.map": "/Spicy_HotFOOD/static/js/main.e427361e.js.map"
   },
   "entrypoints": [
-    "static/css/main.ad483949.css",
-    "static/js/main.34c30e6a.js"
+    "static/css/main.4906863e.css",
+    "static/js/main.e427361e.js"
   ]
 }
