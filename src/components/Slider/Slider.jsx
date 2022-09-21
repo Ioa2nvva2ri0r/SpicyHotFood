@@ -1,4 +1,5 @@
 import React from 'react';
+import ContentLoader from 'react-content-loader';
 import { nanoid } from 'nanoid';
 // Slider-Swiper
 import { Pagination, Autoplay, EffectFade } from 'swiper';
@@ -6,10 +7,15 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+// Context
+import { AppContext } from '../../App';
 // Styles
 import styles from './slider.module.scss';
 
 const Slider = () => {
+  // React-Context
+  const { API } = React.useContext(AppContext);
+
   const arrayDataSlide = [
     {
       src: 'https://img.freepik.com/free-photo/top-view-of-pepperoni-pizza-sliced-into-six-slices_141793-2157.jpg?w=1060&t=st=1659524348~exp=1659524948~hmac=d097722194c0e1fdf4d86f136acaa073319f0ea138010503794e848a1f93f0d3',
@@ -81,32 +87,46 @@ const Slider = () => {
 
   return (
     <div className={styles.main__container}>
-      <Swiper
-        className={styles.main}
-        modules={[Pagination, Autoplay, EffectFade]}
-        spaceBetween={0}
-        autoplay={{
-          delay: 7000,
-          disableOnInteraction: false,
-        }}
-        fadeEffect={{
-          crossFade: true,
-        }}
-        speed={800}
-        pagination={{ clickable: true }}
-      >
-        {arrayDataSlide.map((obj) => (
-          <SwiperSlide key={nanoid()}>
-            <div className={styles.content}>
-              <picture className={styles.img__box}>
-                <source className={styles.img} srcSet={obj.src} />
-                <img className={styles.img} src={obj.src} alt={obj.alt} />
-              </picture>
-              <p className={styles.desc}>{obj.desc}</p>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+      {API.loading ? (
+        <ContentLoader
+          speed={1}
+          width={1370}
+          height={400}
+          viewBox="0 0 1370 400"
+          backgroundColor="#f8f5f1"
+          foregroundColor="#ecebeb"
+        >
+          <rect x="0" y="0" rx="15" ry="15" width="1370" height="400" />
+        </ContentLoader>
+      ) : (
+        <Swiper
+          className={styles.main}
+          modules={[Pagination, Autoplay, EffectFade]}
+          spaceBetween={0}
+          autoplay={{
+            delay: 7000,
+            disableOnInteraction: false,
+          }}
+          fadeEffect={{
+            crossFade: true,
+          }}
+          loop={true}
+          speed={800}
+          pagination={{ clickable: true }}
+        >
+          {arrayDataSlide.map((obj) => (
+            <SwiperSlide key={nanoid()}>
+              <div className={styles.content}>
+                <picture className={styles.img__box}>
+                  <source className={styles.img} srcSet={obj.src} />
+                  <img className={styles.img} src={obj.src} alt={obj.alt} />
+                </picture>
+                <p className={styles.desc}>{obj.desc}</p>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </div>
   );
 };

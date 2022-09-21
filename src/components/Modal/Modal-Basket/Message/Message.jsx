@@ -15,10 +15,7 @@ const Message = ({ elemDOM, className }) => {
 
   const onClickBtnYummy = () => {
     animationClose(elemDOM.current, basket.funModal, className.main__close);
-    category.funCategory({
-      name: 'Популярные',
-      path: '/',
-    });
+    category.funCategory('Популярные');
     setTimeout(() => {
       smoothScroll('#category', 100);
     }, 400);

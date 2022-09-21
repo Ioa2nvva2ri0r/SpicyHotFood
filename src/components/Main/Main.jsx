@@ -12,7 +12,7 @@ const Main = ({ path }) => {
 
   return (
     <main>
-      {!path.includes('favorite') ? (
+      {path !== 'Избранные' ? (
         <>
           <Slider />
           <Catalog data={API.data} />

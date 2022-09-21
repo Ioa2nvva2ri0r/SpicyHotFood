@@ -1,4 +1,5 @@
 import React from 'react';
+import ContentLoader from 'react-content-loader';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
@@ -18,7 +19,7 @@ import IconClose from '../../Modal/Modal-icon/IconClose';
 
 const Nav = ({ className }) => {
   // React-Context
-  const { screenSize, category, favorite, basket, userOrder, finalCost } =
+  const { screenSize, API, category, favorite, basket, userOrder, finalCost } =
     React.useContext(AppContext);
   // React-Context -> Screen Size
   const [screenWidth] = screenSize;
@@ -133,114 +134,154 @@ const Nav = ({ className }) => {
             )}
             {tel && (
               <div ref={boxTelRef} className={className.tel__box}>
-                {[
-                  {
-                    ref: contactTelRef,
-                    name: '+7 (495) 485-85-47',
-                    label: 'Контактный номер телефона',
-                    tel: '+74954858547',
-                  },
-                  {
-                    ref: orderTelRef,
-                    name: '8865',
-                    label: 'Номер телефона для заказа',
-                    tel: '8865',
-                  },
-                ].map((obj) => (
-                  <a
-                    key={nanoid()}
-                    ref={obj.ref}
-                    className={className.tel__link}
-                    href={`tel:${obj.tel}`}
-                    aria-label={obj.label}
+                {API.loading ? (
+                  <ContentLoader
+                    speed={1}
+                    width={294}
+                    height={32}
+                    viewBox="0 0 294 32"
+                    backgroundColor="#f1a4a4"
+                    foregroundColor="#ecebeb"
                   >
-                    <IconHeader icon="tel" />
-                    {obj.name}
-                  </a>
-                ))}
+                    <rect x="0" y="0" rx="5" ry="5" width="197" height="32" />
+                    <rect x="212" y="0" rx="5" ry="5" width="82" height="32" />
+                  </ContentLoader>
+                ) : (
+                  [
+                    {
+                      ref: contactTelRef,
+                      name: '+7 (495) 485-85-47',
+                      label: 'Контактный номер телефона',
+                      tel: '+74954858547',
+                    },
+                    {
+                      ref: orderTelRef,
+                      name: '8865',
+                      label: 'Номер телефона для заказа',
+                      tel: '8865',
+                    },
+                  ].map((obj) => (
+                    <a
+                      key={nanoid()}
+                      ref={obj.ref}
+                      className={className.tel__link}
+                      href={`tel:${obj.tel}`}
+                      aria-label={obj.label}
+                    >
+                      <IconHeader icon="tel" />
+                      {obj.name}
+                    </a>
+                  ))
+                )}
               </div>
             )}
-            <BtnNav
-              id="request-call"
-              content={<>Заказать звонок</>}
-              funNav={() => onClickBtnUserOrder('order')}
-              className={className.tel__btn}
-            />
-          </div>
-          <ul className={className.nav__list}>
-            {['basket', 'favorite', 'user'].map((btn) => (
-              <li
-                key={nanoid()}
-                className={className.nav__item}
-                onClick={() =>
-                  btn === 'favorite' &&
-                  category.funCategory({
-                    name: 'Избранные',
-                    path: '/?p=/favorite',
-                  })
-                }
+            {API.loading ? (
+              <ContentLoader
+                speed={1}
+                width={165}
+                height={32}
+                viewBox="0 0 165 32"
+                backgroundColor="#f1a4a4"
+                foregroundColor="#ecebeb"
               >
-                {btn === 'favorite' ? (
-                  <Link
-                    to="/?p=/favorite"
-                    id={btn}
-                    className={`${className.nav__btn} ${
-                      className.nav__btn_favorite
-                    } ${
-                      category.active.path.includes(btn)
-                        ? className.nav__btn_favorite__active
-                        : ''
-                    }`}
-                    aria-label="Избранные"
-                  >
-                    <IconNav icon={btn} />
-                    <strong>({favorite.length})</strong>
-                  </Link>
-                ) : (
-                  <BtnNav
-                    id={btn}
-                    content={
-                      <>
-                        <IconNav icon={btn} />
-                        {btn === 'basket' && (
-                          <strong>
-                            {basket.length !== 0 ? `${finalCost}руб. ` : null}(
-                            {basket.length})
-                          </strong>
-                        )}
-                        {btn === 'user' && checkingUserName() && (
-                          <strong>
-                            {JSON.parse(localStorage.getItem('user')).name}
-                          </strong>
-                        )}
-                      </>
-                    }
-                    funNav={() =>
-                      btn === 'basket'
-                        ? basket.funModal(true)
-                        : btn === 'user'
-                        ? onClickBtnUserOrder(
-                            checkingUserName() ? 'change' : btn
-                          )
-                        : null
-                    }
-                    className={`${className.nav__btn} ${
-                      btn === 'basket'
-                        ? className.nav__btn_basket
-                        : className.nav__btn_user
-                    }`}
-                    ariaLabel={
-                      btn === 'basket'
-                        ? 'Корзина'
-                        : btn === 'user'
-                        ? 'Пользователь'
-                        : ''
-                    }
-                  />
-                )}
-              </li>
-            ))}
-          </ul>
+                <rect x="0" y="0" rx="5" ry="5" width="165" height="32" />
+              </ContentLoader>
+            ) : (
+              <BtnNav
+                id="request-call"
+                content={<>Заказать звонок</>}
+                funNav={() => onClickBtnUserOrder('order')}
+                className={className.tel__btn}
+              />
+            )}
+          </div>
+          {API.loading ? (
+            <ContentLoader
+              speed={1}
+              width={183}
+              height={22}
+              viewBox="0 0 183 22"
+              backgroundColor="#f1a4a4"
+              foregroundColor="#ecebeb"
+            >
+              <rect x="0" y="0" rx="4" ry="4" width="22" height="22" />
+              <rect x="33" y="3" rx="4" ry="4" width="18" height="17" />
+              <rect x="75" y="0" rx="4" ry="4" width="22" height="22" />
+              <rect x="107" y="3" rx="4" ry="4" width="18" height="17" />
+              <circle cx="161" cy="11" r="11" />
+            </ContentLoader>
+          ) : (
+            <ul className={className.nav__list}>
+              {['basket', 'favorite', 'user'].map((btn) => (
+                <li
+                  key={nanoid()}
+                  className={className.nav__item}
+                  onClick={() =>
+                    btn === 'favorite' && category.funCategory('Избранные')
+                  }
+                >
+                  {btn === 'favorite' ? (
+                    <Link
+                      to={`?product=${encodeURI('Избранные')}`}
+                      id={btn}
+                      className={`${className.nav__btn} ${
+                        className.nav__btn_favorite
+                      } ${
+                        category.active === 'Избранные'
+                          ? className.nav__btn_favorite__active
+                          : ''
+                      }`}
+                      aria-label="Избранные"
+                    >
+                      <IconNav icon={btn} />
+                      <strong>({favorite.length})</strong>
+                    </Link>
+                  ) : (
+                    <BtnNav
+                      id={btn}
+                      content={
+                        <>
+                          <IconNav icon={btn} />
+                          {btn === 'basket' && (
+                            <strong>
+                              {basket.length !== 0 ? `${finalCost}руб. ` : null}
+                              ({basket.length})
+                            </strong>
+                          )}
+                          {btn === 'user' && checkingUserName() && (
+                            <strong>
+                              {JSON.parse(localStorage.getItem('user')).name}
+                            </strong>
+                          )}
+                        </>
+                      }
+                      funNav={() =>
+                        btn === 'basket'
+                          ? basket.funModal(true)
+                          : btn === 'user'
+                          ? onClickBtnUserOrder(
+                              checkingUserName() ? 'change' : btn
+                            )
+                          : null
+                      }
+                      className={`${className.nav__btn} ${
+                        btn === 'basket'
+                          ? className.nav__btn_basket
+                          : className.nav__btn_user
+                      }`}
+                      ariaLabel={
+                        btn === 'basket'
+                          ? 'Корзина'
+                          : btn === 'user'
+                          ? 'Пользователь'
+                          : ''
+                      }
+                    />
+                  )}
+                </li>
+              ))}
+            </ul>
+          )}
           {btnCloseMenu && (
             <BtnNav
               id="menu-close"

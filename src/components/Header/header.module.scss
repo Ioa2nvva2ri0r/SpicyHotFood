@@ -27,9 +27,10 @@
       ju: space-between,
     )
   );
-  @include bordered-padding(1px solid #f3ea693f, 15px, all, 20px);
-  background: linear-gradient(#f1cba4, #f0f1d0);
-  box-shadow: 5px 6px 6px rgba(74, 25, 25, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+  background: linear-gradient(#f1a4a4, #f6e2c8);
+  box-shadow: 5px 6px 6px rgba(90, 26, 26, 0.19);
   @media (max-width: 675px) {
     align-items: center;
     flex-direction: column;
@@ -94,7 +95,7 @@
     @include font(
       (
         we: 700,
-        co: #ae936c,
+        co: #f63e57,
       )
     );
     margin: 0 5px;
@@ -141,6 +142,12 @@
 }
 
 .nav {
+  @include d-flex(
+    (
+      al: flex-end,
+      di: column,
+    )
+  );
   &__list {
     @include throw(li);
     @include d-flex(
@@ -320,6 +327,7 @@
     );
     overflow: hidden;
     border-radius: 5px;
+    box-shadow: 5px 6px 6px rgba(90, 26, 26, 0.19);
   }
   &__link {
     display: block;

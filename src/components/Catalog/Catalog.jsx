@@ -68,10 +68,7 @@ const Catalog = ({ data }) => {
   );
 
   const onClickBtnYummy = () => {
-    category.funCategory({
-      name: 'Популярные',
-      path: '/',
-    });
+    category.funCategory('Популярные');
     setTimeout(() => {
       smoothScroll('#category', 100);
     }, 400);
@@ -83,7 +80,7 @@ const Catalog = ({ data }) => {
         <div className={styles.title__box}>
           <Title
             title={searchValue ? 'Поиск по значению:' : 'Раздел:'}
-            desc={searchValue ? searchValue : category.active.name}
+            desc={searchValue ? searchValue : category.active}
             className={styles}
           />
           <Search
@@ -100,14 +97,14 @@ const Catalog = ({ data }) => {
                 <Card {...item} activeCard={searchValue} />
               </li>
             ))
-          : category.active.name !== 'Избранные' &&
+          : category.active !== 'Избранные' &&
             arrayLimit.map(() => (
               <li className={styles.item} key={nanoid()}>
                 <Card />
               </li>
             ))}
       </ul>
-      {data.length === 0 && category.active.name === 'Избранные' && (
+      {data.length === 0 && category.active === 'Избранные' && (
         <>
           <Message content="Увы но тут пусто..." className={styles.message} />
           <Link

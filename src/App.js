@@ -8,31 +8,28 @@ import {
   dataAPI,
   dataLocalStorage,
 } from './auxiliary-functions/DataProcessing';
-import { checkingPathNameURL } from './auxiliary-functions/ValueСheck';
 import { calculationCost } from './auxiliary-functions/CalculationCost';
 import { discount } from './auxiliary-functions/Discount';
 // Components
 import Header from './components/Header/Header';
-import Main from './components/Main/Main';
 import Footer from './components/Footer/Footer';
 import Message from './components/Message/Message';
 import ModalBasket from './components/Modal/Modal-Basket/ModalBasket';
 import ModalUserOrder from './components/Modal/Modal-UserOrder/ModalUserOrder';
+import Main from './components/Main/Main';
 
 // Context
 export const AppContext = React.createContext({});
 
 function App() {
+  const searchCategory = new URLSearchParams(
+    decodeURI(document.location.search)
+  ).get('product');
   // Main
   const [dataApi, setDataApi] = React.useState([]);
   const [arrayCategory, setArrayCategory] = React.useState([]);
   const [category, setCategory] = React.useState(
-    new URLSearchParams(location.search).has('p')
-      ? checkingPathNameURL(location.search)
-      : {
-          name: 'Популярные',
-          path: '/',
-        }
+    searchCategory !== null ? searchCategory : 'Популярные'
   );
   const [preloaderCatalog, setPreloaderCatalog] = React.useState(false);
   // Basket
@@ -71,7 +68,7 @@ function App() {
   // GET-Data-API -> Catalog  &&  // GET-Data-LocalStorage -> Favorite
   React.useEffect(() => {
     dataAPI(
-      { path: 'food', method: 'GET', category: category.name },
+      { path: 'product', method: 'GET', category: category },
       {
         funGetData: setDataApi,
         funGetCategories: setArrayCategory,
@@ -194,7 +191,7 @@ function App() {
       <div className="container">
         <Header />
         <Routes>
-          <Route path={'/'} element={<Main path={category.path} />} />
+          <Route path={`/`} element={<Main path={searchCategory} />} />
         </Routes>
         <Footer />
         {modalBasket && <ModalBasket />}

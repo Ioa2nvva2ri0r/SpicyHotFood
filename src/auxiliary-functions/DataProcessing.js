@@ -4,22 +4,23 @@ export function dataAPI(options, allFunction) {
   allFunction.funLoading(true);
   return axios({
     method: options.method,
-    url: `https://62d56dba15ad24cbf2c6e691.mockapi.io/${options.path}/${
-      options.id ? options.id : ''
+    url: `https://62d56dba15ad24cbf2c6e691.mockapi.io/${options.path}${
+      options.id ? `/${options.id}` : `?category=food`
     }`,
     data: options.data ? options.data : null,
   })
     .then((res) => {
       if (res.status >= 200 || res.status <= 299) {
-        if (options.method === 'GET' && options.path === 'food') {
-          allFunction.funGetCategories(res.data.map((obj) => obj.category));
+        if (options.method === 'GET' && options.path === 'product') {
+          const data = res.data[0].data;
+
+          allFunction.funGetCategories([
+            ...new Set(data.map(({ category }) => category)),
+          ]);
+
           options.category !== 'Избранные' &&
             allFunction.funGetData(
-              res.data.length !== 0 && res.data[0].data !== undefined
-                ? res.data.filter(
-                    (obj) => obj.category.name === options.category
-                  )[0].data
-                : res.data
+              data.filter(({ category }) => options.category === category)
             );
         } else if (options.method === 'GET') {
           allFunction.funGetData(res.data);

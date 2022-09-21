@@ -8,7 +8,6 @@ import { Navigation, Autoplay, EffectFade } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 // Context
 import { AppContext } from '../../../App';
 // Auxiliary Functions
@@ -69,14 +68,14 @@ const Menu = ({ className }) => {
       animationClose(menuRef.current, setMenu, className.menu__slider_close);
   };
 
-  const link = (path, name) => (
+  const link = (path) => (
     <Link
-      to={path}
+      to={`?product=${encodeURI(path)}`}
       className={`${className.menu__link} ${
-        category.active.name === name ? className.menu__link_active : ''
+        category.active === path ? className.menu__link_active : ''
       }`}
     >
-      {name}
+      {path}
     </Link>
   );
 
@@ -127,13 +126,13 @@ const Menu = ({ className }) => {
               speed={800}
               style={{ borderRadius: '5px' }}
             >
-              {category.array.map((item) => (
+              {category.array.map((path) => (
                 <SwiperSlide
                   key={nanoid()}
                   className={className.menu__item}
-                  onClick={() => onClickBtnCategory(item)}
+                  onClick={() => onClickBtnCategory(path)}
                   onBlur={() =>
-                    item === category.array[category.array.length - 1] &&
+                    path === category.array[category.array.length - 1] &&
                     animationClose(
                       menuRef.current,
                       setMenu,
@@ -141,7 +140,7 @@ const Menu = ({ className }) => {
                     )
                   }
                 >
-                  {link(item.path, item.name)}
+                  {link(path)}
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -157,20 +156,20 @@ const Menu = ({ className }) => {
             width={580}
             height={38}
             viewBox="0 0 580 38"
-            backgroundColor="#f8f0e7"
-            foregroundColor="#fff"
+            backgroundColor="#df9090"
+            foregroundColor="#ecebeb"
           >
             <rect x="0" y="0" rx="8" ry="8" width="580" height="38" />
           </ContentLoader>
         ) : (
           <ul className={className.menu__list}>
-            {category.array.map((item) => (
+            {category.array.map((path) => (
               <li
                 key={nanoid()}
                 className={className.menu__item}
-                onClick={() => onClickBtnCategory(item)}
+                onClick={() => onClickBtnCategory(path)}
               >
-                {link(item.path, item.name)}
+                {link(path)}
               </li>
             ))}
           </ul>

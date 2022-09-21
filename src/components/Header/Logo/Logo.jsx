@@ -9,10 +9,7 @@ const Logo = ({ className }) => {
   const { category } = React.useContext(AppContext);
 
   const upsmoothScroll = () => {
-    category.funCategory({
-      name: 'Популярные',
-      path: '/',
-    });
+    category.funCategory('Популярные');
     return window.scroll({
       top: 0,
       behavior: 'smooth',

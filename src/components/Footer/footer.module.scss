@@ -7,9 +7,10 @@
       di: column,
     )
   );
-  @include bordered-padding(1px solid #f3ea693f, 15px, all, 20px);
-  background: linear-gradient(#f1cba4, #f0f1d0);
-  box-shadow: 5px 6px 6px rgba(74, 25, 25, 0.05);
+  border-radius: 15px;
+  padding: 20px;
+  background: linear-gradient(#f6e2c8, #f1a4a4);
+  box-shadow: 5px 6px 6px rgba(90, 26, 26, 0.19);
   @media (max-width: 860px) {
     padding: 10px 15px;
   }

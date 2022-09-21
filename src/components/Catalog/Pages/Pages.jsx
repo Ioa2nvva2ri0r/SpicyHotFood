@@ -27,7 +27,7 @@ const Pages = ({ pages, activePage, funSwitchPage }) => {
           onClick={() => onClickBtnPage(page)}
         >
           <Link
-            to={`${category.active.path}#${page}`}
+            to={`?product=${encodeURI(category.active)}#${page}`}
             className={`${styles.pages__link} ${
               activePage === page ? styles.pages__link_active : ''
             }`}
