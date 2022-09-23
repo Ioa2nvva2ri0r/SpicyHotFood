@@ -329,6 +329,16 @@
     border-radius: 5px;
     box-shadow: 5px 6px 6px rgba(90, 26, 26, 0.19);
   }
+  &__item {
+    &:first-child a {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+    &:last-child a {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+  }
   &__link {
     display: block;
     text-decoration: none;

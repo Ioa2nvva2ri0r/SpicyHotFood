@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
 // Context
 import { AppContext } from '../../../App';
 // Auxiliary Functions
@@ -23,7 +22,7 @@ const Pages = ({ pages, activePage, funSwitchPage }) => {
       {pages.map((page) => (
         <li
           className={styles.pages__item}
-          key={nanoid()}
+          key={`page-${page}`}
           onClick={() => onClickBtnPage(page)}
         >
           <Link

@@ -1,5 +1,4 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
 // Context
 import { AppContext } from '../../../App';
 // Auxiliary Functions
@@ -70,8 +69,8 @@ const ModalBasket = () => {
           {basket.length > 0 ? (
             <SimpleBar style={{ height: `${heightSimpleBar}px` }}>
               <ul className={styles.list}>
-                {basket.data.map((item) => (
-                  <li key={nanoid()} className={styles.item}>
+                {basket.data.map((item, id) => (
+                  <li key={`basket-card-${id + 1}`} className={styles.item}>
                     <Card {...item} />
                   </li>
                 ))}

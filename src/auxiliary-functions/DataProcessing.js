@@ -1,73 +1,72 @@
+/* eslint-disable no-undef */
 import axios from 'axios';
+const env = process.env;
 
-export function dataAPI(options, allFunction) {
-  allFunction.funLoading(true);
+export function dataAPI(
+  { id, path, method, data, category, process },
+  { loading, getData, getCategories, getMessage }
+) {
+  loading(true);
+
   return axios({
-    method: options.method,
-    url: `https://62d56dba15ad24cbf2c6e691.mockapi.io/${options.path}${
-      options.id ? `/${options.id}` : `?category=food`
+    method: method,
+    url: `${env.REACT_APP_API_URL}/${path}/${
+      id ? id : `?category=${env.REACT_APP_PRODUCT}`
     }`,
-    data: options.data ? options.data : null,
+    data: data ? data : null,
   })
     .then((res) => {
       if (res.status >= 200 || res.status <= 299) {
-        if (options.method === 'GET' && options.path === 'product') {
+        if (method === 'GET' && path === 'product') {
           const data = res.data[0].data;
 
-          allFunction.funGetCategories([
-            ...new Set(data.map(({ category }) => category)),
-          ]);
-
-          options.category !== 'Избранные' &&
-            allFunction.funGetData(
-              data.filter(({ category }) => options.category === category)
-            );
-        } else if (options.method === 'GET') {
-          allFunction.funGetData(res.data);
+          getCategories &&
+            getCategories([...new Set(data.map((obj) => obj.category))]);
+          getData && getData(data.filter((obj) => obj.category === category));
+        } else if (method === 'GET') {
+          getData(res.data);
         }
 
-        if (options.method === 'POST' && options.path === 'order') {
-          allFunction.funGetMessage(
+        if (method === 'POST' && path === 'order') {
+          getMessage(
             `"${res.data.name}" благодарим за оставленную заявку, в ближайшее время мы свяжемся с Вами!`
           );
           res.data.order !== undefined && localStorage.removeItem('basket');
         }
 
-        if (options.method !== 'GET' && options.path === 'user') {
-          if (options.process === 'create' || options.process === 'change')
+        if (method !== 'GET' && path === 'user') {
+          if (process === 'create' || process === 'change')
             localStorage.setItem('user', JSON.stringify(res.data));
-          if (options.process === 'delete') localStorage.removeItem('user');
+          if (process === 'delete') localStorage.removeItem('user');
 
-          allFunction.funGetMessage(
-            options.process === 'create'
+          getMessage(
+            process === 'create'
               ? `Поздравляем, пользователь "${res.data.name}" успешно создан!`
-              : options.process === 'change'
+              : process === 'change'
               ? `Пользователь "${res.data.name}" успешно изменен!`
-              : options.process === 'delete'
+              : process === 'delete'
               ? `Пользователь "${res.data.name}" успешно удален!`
               : ''
           );
 
           dataAPI(
-            { path: options.path, method: 'GET' },
+            { path: path, method: 'GET' },
             {
-              funGetData: allFunction.funGetData,
-              funLoading: allFunction.funLoading,
+              getData: getData,
+              loading: loading,
             }
           );
         }
       }
     })
-    .finally(() => {
-      allFunction.funLoading(false);
-    });
+    .finally(() => loading(false));
 }
 
-export function dataLocalStorage(options, funGetData, getMessage) {
+export function dataLocalStorage(options, getData, getMessage) {
   const setAndGetItemData = (method, key, data, name) => {
     return (
       localStorage.setItem(key, JSON.stringify(data)),
-      funGetData(JSON.parse(localStorage.getItem(key))),
+      getData(JSON.parse(localStorage.getItem(key))),
       getMessage(
         `"${name}" ${
           method === 'DELETE'
@@ -92,7 +91,7 @@ export function dataLocalStorage(options, funGetData, getMessage) {
 
   switch (options.method) {
     case 'GET':
-      return funGetData(arrayData);
+      return getData(arrayData);
     case 'POST':
       return setAndGetItemData(
         options.method,

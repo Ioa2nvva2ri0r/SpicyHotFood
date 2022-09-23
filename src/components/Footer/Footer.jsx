@@ -1,5 +1,4 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
 // Components
 import Logo from '../Header/Logo/Logo';
 import IconSocials from './Footer-icon/IconSocials';
@@ -64,8 +63,8 @@ const Footer = () => {
               </a>
               .
             </>,
-          ].map((desc) => (
-            <span key={nanoid()}>
+          ].map((desc, id) => (
+            <span key={`icon-checkbox-${id + 1}`}>
               <IconHeader icon="checkbox" />
               {desc}
             </span>
@@ -73,8 +72,8 @@ const Footer = () => {
         </p>
         <img className={styles.img} src={Deliveryman} alt="Deliveryman" />
         <ul className={styles.socials__list}>
-          {socials.map((obj) => (
-            <li className={styles.socials__item} key={nanoid()}>
+          {socials.map((obj, id) => (
+            <li className={styles.socials__item} key={`socials-${id + 1}`}>
               <a
                 className={styles.socials__link}
                 href={obj.link}

@@ -70,9 +70,11 @@ function App() {
     dataAPI(
       { path: 'product', method: 'GET', category: category },
       {
-        funGetData: setDataApi,
-        funGetCategories: setArrayCategory,
-        funLoading: setPreloaderCatalog,
+        loading: setPreloaderCatalog,
+        ...(category !== 'Избранные' && {
+          getData: setDataApi,
+        }),
+        getCategories: setArrayCategory,
       }
     );
     dataLocalStorage({ method: 'GET', key: 'favorite' }, setDataFavorite);
@@ -83,8 +85,8 @@ function App() {
     dataAPI(
       { path: 'user', method: 'GET' },
       {
-        funGetData: setDataApiUser,
-        funLoading: setPreloaderUserOrder,
+        loading: setPreloaderUserOrder,
+        getData: setDataApiUser,
       }
     );
   }, [modalUserOrder]);
@@ -110,7 +112,7 @@ function App() {
     setFinalCost(
       dataBasket
         .map((obj) =>
-          calculationCost(obj.category, obj.amount, obj.size, obj.price, true)
+          calculationCost(obj.name, obj.amount, obj.size, obj.price, true)
         )
         .reduce((prev, curr) => prev + curr, 0)
     );
@@ -143,9 +145,9 @@ function App() {
           process: changeDataUserOrder.process,
         },
         {
-          funGetData: setDataApiUser,
-          funLoading: setPreloaderUserOrder,
-          funGetMessage: setMessageUserOrOrder,
+          loading: setPreloaderUserOrder,
+          getData: setDataApiUser,
+          getMessage: setMessageUserOrOrder,
         }
       );
     }

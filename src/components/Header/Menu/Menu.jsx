@@ -2,7 +2,6 @@ import React from 'react';
 import ContentLoader from 'react-content-loader';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
 // Slider-Swiper
 import { Navigation, Autoplay, EffectFade } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -126,9 +125,9 @@ const Menu = ({ className }) => {
               speed={800}
               style={{ borderRadius: '5px' }}
             >
-              {category.array.map((path) => (
+              {category.array.map((path, id) => (
                 <SwiperSlide
-                  key={nanoid()}
+                  key={`category-slide-${id + 1}`}
                   className={className.menu__item}
                   onClick={() => onClickBtnCategory(path)}
                   onBlur={() =>
@@ -163,9 +162,9 @@ const Menu = ({ className }) => {
           </ContentLoader>
         ) : (
           <ul className={className.menu__list}>
-            {category.array.map((path) => (
+            {category.array.map((path, id) => (
               <li
-                key={nanoid()}
+                key={`category-${id + 1}`}
                 className={className.menu__item}
                 onClick={() => onClickBtnCategory(path)}
               >

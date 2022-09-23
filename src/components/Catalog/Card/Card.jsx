@@ -13,9 +13,9 @@ import Size from './Size/Size';
 import Preloader from './Preloader/Preloader';
 import Price from './Price/Price';
 import BasketFavorite from './Basket-Favorite/BasketFavorite';
+import Amount from './Amount/Amount';
 // Styles
 import styles from './card.module.scss';
-import Amount from './Amount/Amount';
 
 const Card = ({
   id,
@@ -35,31 +35,39 @@ const Card = ({
   // React-Context
   const state = React.useContext(AppContext);
   // React-State
-  const [prodAmount, setProdAmount] = React.useState(amount);
-  const [prodSize, setProdSize] = React.useState(size);
-  const [prodBasket, setProdBasket] = React.useState(basket);
-  const [prodFavorite, setProdFavorite] = React.useState(favorite);
-  const [finalCost, setFinalCost] = React.useState(
-    calculationCost(category, amount, size, price)
-  );
+  const [prodAmount, setProdAmount] = React.useState(1);
+  const [prodSize, setProdSize] = React.useState('');
+  const [prodBasket, setProdBasket] = React.useState(false);
+  const [prodFavorite, setProdFavorite] = React.useState(false);
+  const [finalCost, setFinalCost] = React.useState(0);
+
+  React.useEffect(() => {
+    setProdAmount(amount);
+    setProdSize(size);
+    setProdBasket(basket);
+    setProdFavorite(favorite);
+    setFinalCost(calculationCost(name, amount, size, price));
+  }, [name, amount, size, price, basket, favorite]);
 
   const onClickBtnAmount = (symbol) => {
+    const value = name.toLowerCase();
+
     const quantityChangeByType = (objType) => {
       return quantityChangeProduct(
         objType,
         prodAmount,
         symbol,
-        category === 'Суши' ? 2 : 1,
-        category === 'Суши' ? 7 : 2,
-        category === 'Суши' ? 15 : 9
+        value.includes('суши') || value.includes('ролл') ? 2 : 1,
+        value.includes('суши') || value.includes('ролл') ? 7 : 2,
+        value.includes('суши') || value.includes('ролл') ? 15 : 9
       );
     };
 
     quantityChangeByType({ type: 'fun', variable: setProdAmount });
     setFinalCost(
       calculationCost(
-        category,
-        category === 'Суши'
+        name,
+        value.includes('суши') || value.includes('ролл')
           ? quantityChangeByType({ type: 'var', variable: prodAmount })
           : amount,
         prodSize,
@@ -81,7 +89,7 @@ const Card = ({
 
   const onClickBtnSize = (value) => {
     setProdSize(value);
-    setFinalCost(calculationCost(category, amount, value, price));
+    setFinalCost(calculationCost(name, amount, value, price));
 
     if (prodBasket)
       state.basket.funChange({

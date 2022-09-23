@@ -1,6 +1,5 @@
 import React from 'react';
 import ContentLoader from 'react-content-loader';
-import { nanoid } from 'nanoid';
 // Slider-Swiper
 import { Pagination, Autoplay, EffectFade } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -11,6 +10,8 @@ import 'swiper/css/pagination';
 import { AppContext } from '../../App';
 // Styles
 import styles from './slider.module.scss';
+// Image
+import sale50 from './sale50.png';
 
 const Slider = () => {
   // React-Context
@@ -40,16 +41,18 @@ const Slider = () => {
       desc: (
         <>
           <strong className={styles.desc__note}>Только по будням!</strong>{' '}
-          <span className={`${styles.desc__end} ${styles.desc__note_red}`}>
+          <span className={styles.desc__end}>
             С 11.00 до 14.00{' '}
-            <strong className={styles.desc__note}>скидка на всё 10%</strong>
+            <strong className={`${styles.desc__note} ${styles.desc__note_red}`}>
+              скидка на всё 10%
+            </strong>
             Успей купить!
           </span>
         </>
       ),
     },
     {
-      src: 'https://img.freepik.com/free-photo/pizza-with-salami-tomatoes-olives-and-cheese-on-a-dough-with-whole-wheat-flour-italian-food_2829-6855.jpg?w=1060&t=st=1659524389~exp=1659524989~hmac=61b26913564083dbdd6e2d6c6e2485044d8fb027a654dc18abdee24aa041a5cc',
+      src: 'https://img.freepik.com/premium-photo/tasty-pepperoni-pizza-on-a-black-concrete-background_79782-103.jpg?w=2380',
       alt: 'Пицца',
       desc: (
         <>
@@ -59,11 +62,7 @@ const Slider = () => {
           <span className={`${styles.desc__m10} ${styles.desc__center}`}>
             Каждый четвёртый четверг месяца с 11.00 до 17.00
           </span>{' '}
-          <strong
-            className={`${styles.desc__note} ${styles.desc__note_red} ${styles.desc__center}`}
-          >
-            скидка 50%!
-          </strong>
+          <img className={styles.desc__img} src={sale50} alt="Скикда 50%" />
         </>
       ),
     },
@@ -72,11 +71,11 @@ const Slider = () => {
       alt: 'Тако',
       desc: (
         <>
-          <strong
-            className={`${styles.desc__note} ${styles.desc__note_red} ${styles.desc__center}`}
-          >
-            ХИТ ЭТОГО СЕЗОНА!
-          </strong>{' '}
+          <img
+            className={styles.desc__img}
+            src="https://static.insales-cdn.com/images/collections/1/3126/1756214/%D1%85%D0%B8%D1%827.png"
+            alt="Хит продаж"
+          />{' '}
           <strong className={styles.desc__name}>
             «Тако с говядиной в томатном соусе и сальсой»
           </strong>
@@ -114,8 +113,8 @@ const Slider = () => {
           speed={800}
           pagination={{ clickable: true }}
         >
-          {arrayDataSlide.map((obj) => (
-            <SwiperSlide key={nanoid()}>
+          {arrayDataSlide.map((obj, id) => (
+            <SwiperSlide key={`slide-${id + 1}`}>
               <div className={styles.content}>
                 <picture className={styles.img__box}>
                   <source className={styles.img} srcSet={obj.src} />

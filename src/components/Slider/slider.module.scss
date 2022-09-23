@@ -4,6 +4,7 @@
   border-radius: 15px;
   height: 100%;
   &__container {
+    overflow: hidden;
     height: 400px;
     border-radius: 15px;
     padding-top: 30px;
@@ -121,10 +122,14 @@
     );
     &_red {
       color: #ff0026;
+      text-shadow: 1px 1px #a34545, 1.5px 1.5px #ff6f6f !important;
     }
     &_mw {
       max-width: 320px;
     }
+  }
+  &__img {
+    width: 193px;
   }
   @media (max-width: 1115px) {
     font-size: 30px;
@@ -165,6 +170,9 @@
     &__note {
       font-size: 20px;
     }
+    &__img {
+      width: 140px;
+    }
   }
   @media (max-width: 420px) {
     font-size: 12px;
@@ -176,6 +184,9 @@
     }
     &__m10 {
       margin: 0 5px;
+    }
+    &__img {
+      width: 90px;
     }
   }
 }

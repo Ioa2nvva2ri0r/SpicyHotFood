@@ -6,14 +6,11 @@ export function costPerSize(size, price) {
     : price;
 }
 
-export function calculationCost(
-  category,
-  amount,
-  size,
-  price,
-  finalCost = false
-) {
-  return category === 'Суши'
+export function calculationCost(name, amount, size, price, finalCost = false) {
+  const checkingName = (value) =>
+    name ? name.toLowerCase().includes(value) : '';
+
+  return checkingName('суши') || checkingName('ролл')
     ? amount === 6
       ? price
       : price + Math.round(price * ((amount - 6) / 10))

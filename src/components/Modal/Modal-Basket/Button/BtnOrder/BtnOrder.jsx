@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
 // Context
 import { AppContext } from '../../../../../App';
 // Auxiliary Functions
@@ -31,8 +30,8 @@ const BtnOrder = ({ modalElemDOM, orderElemDOM, className }) => {
           desc: 'Итого',
           value: Math.round(finalCost - finalCost * (discount / 100)),
         },
-      ].map((obj) => (
-        <p key={nanoid()} className={className.order__desc}>
+      ].map((obj, id) => (
+        <p key={`desc-order-${id + 1}`} className={className.order__desc}>
           <span>{obj.desc}:</span>
           <span>
             {obj.value}{' '}

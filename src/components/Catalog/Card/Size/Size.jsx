@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
 
 const Size = ({ size, weight, funSize, className }) => {
   return size !== undefined ? (
@@ -11,12 +10,12 @@ const Size = ({ size, weight, funSize, className }) => {
           { size: 'littel', desc: '30 см.' },
           { size: 'middle', desc: '35 см.' },
           { size: 'big', desc: '40 см.' },
-        ].map((btn) => (
+        ].map((btn, id) => (
           <button
             className={`${className.size__btn} ${
               size === btn.size ? className.size__btn_active : ''
             }`}
-            key={nanoid()}
+            key={`btn-size-${id + 1}`}
             onClick={() => funSize(btn.size)}
           >
             {btn.desc}

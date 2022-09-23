@@ -1,5 +1,4 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
 // Components
 import Logo from './Logo/Logo';
 import Menu from './Menu/Menu';
@@ -30,8 +29,8 @@ const Header = () => {
               ),
             },
             { name: 'calendar', desc: <>Без обеда и выходных!</> },
-          ].map((obj) => (
-            <span key={nanoid()} className={styles.desc__box}>
+          ].map((obj, id) => (
+            <span key={`icon-header-${id + 1}`} className={styles.desc__box}>
               <IconHeader icon={obj.name} />
               {obj.desc}
             </span>

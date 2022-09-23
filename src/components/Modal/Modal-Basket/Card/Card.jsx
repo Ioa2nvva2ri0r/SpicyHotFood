@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
 // Context
 import { AppContext } from '../../../../App';
 // Auxiliary Functions
@@ -17,7 +16,7 @@ const ModalCard = ({ id, category, name, src, price, amount, size }) => {
   const arrayDesc = [
     {
       name: 'Цена:',
-      desc: `${calculationCost(category, amount, size, price)} руб.`,
+      desc: `${calculationCost(name, amount, size, price)} руб.`,
     },
     category === 'Пицца'
       ? {
@@ -42,8 +41,8 @@ const ModalCard = ({ id, category, name, src, price, amount, size }) => {
       <div className={styles.content__box}>
         <h3 className={styles.title}>{name}</h3>
         <p className={styles.content}>
-          {arrayDesc.map((obj) => (
-            <span key={nanoid()}>
+          {arrayDesc.map((obj, id) => (
+            <span key={`basket-card-desc-${id + 1}`}>
               <strong>{obj.name}</strong>
               {obj.desc}
             </span>

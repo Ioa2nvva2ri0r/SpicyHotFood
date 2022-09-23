@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
 // Context
 import { AppContext } from '../../App';
 // Auxiliary Functions
@@ -12,9 +11,9 @@ import Title from './Title/Title';
 import Search from './Search/Search';
 import Card from './Card/Card';
 import Pages from './Pages/Pages';
+import Message from './Message/Message';
 // Styles
 import styles from './catalog.module.scss';
-import Message from './Message/Message';
 
 const Catalog = ({ data }) => {
   const initPage = Number(
@@ -24,6 +23,7 @@ const Catalog = ({ data }) => {
   const { screenSize, category, basket, favorite } =
     React.useContext(AppContext);
   // React-State
+  const [newArray, setNewArray] = React.useState([]);
   const [page, setPage] = React.useState(initPage);
   const [searchValue, setSearchValue] = React.useState('');
 
@@ -37,6 +37,19 @@ const Catalog = ({ data }) => {
       : screenWidth >= 625
       ? 6
       : 3;
+
+  React.useEffect(() => {
+    setNewArray(
+      transformationArray(
+        data,
+        basket.data,
+        favorite.data,
+        searchValue,
+        cardLimit,
+        page
+      )
+    );
+  }, [data, basket.data, favorite.data, searchValue, cardLimit, page]);
 
   // React-State -> Pages
   const [arrayPages, setArrayPages] = React.useState([]);
@@ -57,15 +70,6 @@ const Catalog = ({ data }) => {
       setArrayLimit((prev) => Array.from(new Set([...prev, num])));
     }
   }, [cardLimit]);
-
-  const newArray = transformationArray(
-    data,
-    basket.data,
-    favorite.data,
-    searchValue,
-    cardLimit,
-    page
-  );
 
   const onClickBtnYummy = () => {
     category.funCategory('Популярные');
@@ -93,13 +97,13 @@ const Catalog = ({ data }) => {
       <ul className={styles.list}>
         {data.length !== 0
           ? newArray.map((item) => (
-              <li className={styles.item} key={nanoid()}>
+              <li className={styles.item} key={item.id}>
                 <Card {...item} activeCard={searchValue} />
               </li>
             ))
           : category.active !== 'Избранные' &&
-            arrayLimit.map(() => (
-              <li className={styles.item} key={nanoid()}>
+            arrayLimit.map((id) => (
+              <li className={styles.item} key={`limit-${id}`}>
                 <Card />
               </li>
             ))}

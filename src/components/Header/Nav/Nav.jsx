@@ -2,7 +2,6 @@ import React from 'react';
 import ContentLoader from 'react-content-loader';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { nanoid } from 'nanoid';
 // Context
 import { AppContext } from '../../../App';
 // Auxiliary Functions
@@ -160,9 +159,9 @@ const Nav = ({ className }) => {
                       label: 'Номер телефона для заказа',
                       tel: '8865',
                     },
-                  ].map((obj) => (
+                  ].map((obj, id) => (
                     <a
-                      key={nanoid()}
+                      key={`tel-${id + 1}`}
                       ref={obj.ref}
                       className={className.tel__link}
                       href={`tel:${obj.tel}`}
@@ -212,9 +211,9 @@ const Nav = ({ className }) => {
             </ContentLoader>
           ) : (
             <ul className={className.nav__list}>
-              {['basket', 'favorite', 'user'].map((btn) => (
+              {['basket', 'favorite', 'user'].map((btn, id) => (
                 <li
-                  key={nanoid()}
+                  key={`nav-${id + 1}`}
                   className={className.nav__item}
                   onClick={() =>
                     btn === 'favorite' && category.funCategory('Избранные')
