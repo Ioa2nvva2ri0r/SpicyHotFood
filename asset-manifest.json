@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Spicy_HotFOOD/static/css/main.f7f0004d.css",
-    "main.js": "/Spicy_HotFOOD/static/js/main.d574aada.js",
-    "static/media/Deliveryman.png": "/Spicy_HotFOOD/static/media/Deliveryman.317da28d683a298199e4.png",
-    "static/media/sale50.png": "/Spicy_HotFOOD/static/media/sale50.9ebd1e207d9ec6ce4d2a.png",
-    "index.html": "/Spicy_HotFOOD/index.html",
-    "static/media/lazy-img.svg": "/Spicy_HotFOOD/static/media/lazy-img.95064264df5ac005bab4b21fe7fdb07e.svg",
-    "main.f7f0004d.css.map": "/Spicy_HotFOOD/static/css/main.f7f0004d.css.map",
-    "main.d574aada.js.map": "/Spicy_HotFOOD/static/js/main.d574aada.js.map"
+    "main.css": "/SpicyHotFood/static/css/main.20b20580.css",
+    "main.js": "/SpicyHotFood/static/js/main.7dd09d84.js",
+    "static/media/Deliveryman.png": "/SpicyHotFood/static/media/Deliveryman.317da28d683a298199e4.png",
+    "static/media/sale50.png": "/SpicyHotFood/static/media/sale50.9ebd1e207d9ec6ce4d2a.png",
+    "index.html": "/SpicyHotFood/index.html",
+    "static/media/lazy-img.svg": "/SpicyHotFood/static/media/lazy-img.95064264df5ac005bab4b21fe7fdb07e.svg",
+    "main.20b20580.css.map": "/SpicyHotFood/static/css/main.20b20580.css.map",
+    "main.7dd09d84.js.map": "/SpicyHotFood/static/js/main.7dd09d84.js.map"
   },
   "entrypoints": [
-    "static/css/main.f7f0004d.css",
-    "static/js/main.d574aada.js"
+    "static/css/main.20b20580.css",
+    "static/js/main.7dd09d84.js"
   ]
 }
