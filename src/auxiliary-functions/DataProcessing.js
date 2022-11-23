@@ -6,25 +6,28 @@ export function dataAPI(
   { id, path, method, data, category, process },
   { loading, getData, getCategories, getMessage }
 ) {
-  loading(true);
+  loading && loading(true);
 
   return axios({
     method: method,
-    url: `${env.REACT_APP_API_URL}/${path}/${
-      id ? id : `?category=${env.REACT_APP_PRODUCT}`
+    url: `${env.REACT_APP__API_URL}/${path ? path : env.REACT_APP__PATH}/${
+      id ? id : `?category=${env.REACT_APP__PRODUCT}`
     }`,
-    data: data ? data : null,
+    ...(data && {
+      data: data,
+    }),
   })
     .then((res) => {
       if (res.status >= 200 || res.status <= 299) {
-        if (method === 'GET' && path === 'product') {
-          const data = res.data[0].data;
+        if (method === 'GET') {
+          const data = path ? res.data : res.data[0].data;
 
-          getCategories &&
-            getCategories([...new Set(data.map((obj) => obj.category))]);
-          getData && getData(data.filter((obj) => obj.category === category));
-        } else if (method === 'GET') {
-          getData(res.data);
+          if (path) getData(data);
+          else {
+            getCategories &&
+              getCategories([...new Set(data.map((obj) => obj.category))]);
+            getData && getData(data.filter((obj) => obj.category === category));
+          }
         }
 
         if (method === 'POST' && path === 'order') {
@@ -59,7 +62,7 @@ export function dataAPI(
         }
       }
     })
-    .finally(() => loading(false));
+    .finally(() => loading && loading(false));
 }
 
 export function dataLocalStorage(options, getData, getMessage) {

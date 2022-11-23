@@ -2,7 +2,7 @@
   "name": "spicy_hot_food",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ioa2nvva2ri0r.github.io/Spicy_HotFOOD/",
+  "homepage": "https://ioa2nvva2ri0r.github.io/SpicyHotFood/",
   "dependencies": {
     "@react-spring/web": "^9.5.2",
     "@testing-library/jest-dom": "^5.16.4",

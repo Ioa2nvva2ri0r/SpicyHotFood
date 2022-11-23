@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 // lazysizes Image
 import 'lazysizes';
 import 'lazysizes/plugins/parent-fit/ls.parent-fit';
@@ -11,20 +11,20 @@ import {
 import { calculationCost } from './auxiliary-functions/CalculationCost';
 import { discount } from './auxiliary-functions/Discount';
 // Components
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import Message from './components/Message/Message';
-import ModalBasket from './components/Modal/Modal-Basket/ModalBasket';
-import ModalUserOrder from './components/Modal/Modal-UserOrder/ModalUserOrder';
-import Main from './components/Main/Main';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Message from './components/Message';
+import ModalBasket from './components/Modal/Modal-Basket';
+import ModalUserOrder from './components/Modal/Modal-UserOrder';
+import Main from './components/Main';
 
 // Context
 export const AppContext = React.createContext({});
 
 function App() {
-  const searchCategory = new URLSearchParams(
-    decodeURI(document.location.search)
-  ).get('product');
+  const searchCategory = new URLSearchParams(useLocation().search).get(
+    'product'
+  );
   // Main
   const [dataApi, setDataApi] = React.useState([]);
   const [arrayCategory, setArrayCategory] = React.useState([]);
@@ -68,7 +68,7 @@ function App() {
   // GET-Data-API -> Catalog  &&  // GET-Data-LocalStorage -> Favorite
   React.useEffect(() => {
     dataAPI(
-      { path: 'product', method: 'GET', category: category },
+      { method: 'GET', category: category },
       {
         loading: setPreloaderCatalog,
         ...(category !== 'Избранные' && {
